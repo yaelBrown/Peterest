@@ -1,0 +1,37 @@
+/*
+Colors
+  --ptBlue1: "00dffc";
+  --ptBlue2: "008C9E";
+  --ptBlue3: "005F6b";
+  --ptGrey: "343838";
+*/
+
+
+/* Variables */
+
+:root {
+  --var: "";
+}
+
+/* Borders (for troubleshooting) */
+
+.wborder {
+  border: 1px solid #fff;
+  z-index: 999;
+}
+
+.bborder {
+  border: 1px solid #000;
+  z-index: 999;
+}
+
+
+/* Basic Page Elements */
+
+* {
+  box-sizing: border-box;
+}
+
+.pacifico-font {
+  font-family: 'Pacifico', cursive !important;
+}
