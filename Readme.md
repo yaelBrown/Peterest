@@ -1,5 +1,4 @@
 # Peterest
----
 
 Peterest is a Pinterest clone for pets. Was originally a Codeup Project but being recreated.
 
