@@ -26,4 +26,5 @@ def cats(n):
 
 # Creates a random user
 def user():
-  response requests.get("https://randomuser.me/api/")
+  response = requests.get("https://randomuser.me/api/")
+
