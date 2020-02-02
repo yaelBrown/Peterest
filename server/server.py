@@ -3,7 +3,7 @@ from flask_restful import Resource, Api
 from flask_mysqldb import MySQL
 from flask_cors import CORS
 
-# from "./controllers/userController.py" import *
+from controllers.userController import userController
 
 app = Flask(__name__)
 api = Api(app)
@@ -16,7 +16,7 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 CORS(app)
 
-# app.register_blueprint(userController)
+app.register_blueprint(userController, url_prefix='/api')
 
 @app.route("/")
 def index():
