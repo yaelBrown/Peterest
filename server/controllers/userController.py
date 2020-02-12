@@ -1,5 +1,6 @@
 from flask import Flask, request, Blueprint, jsonify
 from flask_bcrypt import Bcrypt
+from flask_mysqldb import MySQL
 
 userController = Blueprint('userController', __name__)
 
@@ -15,7 +16,15 @@ def register():
   if request.method == 'GET':
     return jsonify({"msg": "This must be a post!"}), 200
   if request.method == 'POST':
-    return "good this is a post"
+    data = request.get_json()
+
+    newUser = {}
+    newUser["username"] = data["username"]
+    newUser["pw"] = Bcrypt.generate_password_hash(_nothing, data["password"], _rounds)
+    newUser["isAdmin"] = False
+    newUser["name"] = data["name"]
+
+    return jsonify(newUser), 200
 
 @userController.route('/test')
 def test():
@@ -25,3 +34,8 @@ def test():
   pw_hash = Bcrypt.generate_password_hash(_nothing, password, _rounds)
 
   return pw_hash
+
+
+
+
+  # add sql alchemy to project.
