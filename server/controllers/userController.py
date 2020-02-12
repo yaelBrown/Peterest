@@ -1,7 +1,4 @@
-from flask import Flask, request
-from flask import Blueprint
-
-# from flask_mysqldb import flask_mysqldb
+from flask import Flask, request, Blueprint, jsonify
 from flask_bcrypt import Bcrypt
 
 userController = Blueprint('userController', __name__)
@@ -16,7 +13,7 @@ def login():
 @userController.route('/register', methods=['GET', 'POST'])
 def register():
   if request.method == 'GET':
-    return "This request must be a POST"
+    return jsonify({"msg": "This must be a post!"}), 200
   if request.method == 'POST':
     return "good this is a post"
 

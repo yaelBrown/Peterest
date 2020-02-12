@@ -1,12 +1,10 @@
 from flask import Flask
-from flask_restful import Resource, Api
 from flask_mysqldb import MySQL
 from flask_cors import CORS
 
 from controllers.userController import userController
 
 app = Flask(__name__)
-api = Api(app)
 
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'codeup'
