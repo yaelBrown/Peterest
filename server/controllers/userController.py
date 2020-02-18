@@ -2,6 +2,8 @@ from flask import Flask, request, Blueprint, jsonify
 from flask_bcrypt import Bcrypt
 from flask_mysqldb import MySQL
 
+import json
+
 userController = Blueprint('userController', __name__)
 
 _rounds = 12
@@ -24,7 +26,9 @@ def register():
     newUser["isAdmin"] = False
     newUser["name"] = data["name"]
 
-    return jsonify(newUser), 200
+    print(newUser)
+    return "??"
+    # return json.dump(newUser)
 
 @userController.route('/test')
 def test():
