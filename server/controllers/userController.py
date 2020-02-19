@@ -28,11 +28,11 @@ def register():
     newUser["pw"] = Bcrypt.generate_password_hash(_nothing, data["password"], _rounds)
     newUser["isAdmin"] = False
     newUser["name"] = data["name"]
+    print(newUser)
 
     cur = con.cursor()
     cur.execute("INSERT INTO users (username, pw, isAdmin, name) values (%s, %s, %s, %s)", (newUser["username"], newUser["pw"], int(newUser["isAdmin"]), newUser["name"]))
 
-    print(newUser)
     return "??"
 
 @userController.route('/test')
