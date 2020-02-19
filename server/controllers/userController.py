@@ -3,11 +3,14 @@ from flask_bcrypt import Bcrypt
 from flask_mysqldb import MySQL
 
 import json
+import pymysql
 
 userController = Blueprint('userController', __name__)
 
 _rounds = 12
 _nothing = None
+
+con = pymysql.Connect('localhost', 'root', 'codeup', 'Peterest')
 
 @userController.route('/login')
 def login():
@@ -26,9 +29,11 @@ def register():
     newUser["isAdmin"] = False
     newUser["name"] = data["name"]
 
+    cur = con.cursor()
+    cur.execute("INSERT INTO users (username, pw, isAdmin, name) values (%s, %s, %s, %s)", (newUser["username"], newUser["pw"], int(newUser["isAdmin"]), newUser["name"]))
+
     print(newUser)
     return "??"
-    # return json.dump(newUser)
 
 @userController.route('/test')
 def test():

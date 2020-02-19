@@ -12,6 +12,8 @@ app.config['MYSQL_HOST'] = 'localhost:3306'
 app.config['MYSQL_DB'] = 'Peterest'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
+mysql = MySQL(app)
+
 CORS(app)
 
 app.register_blueprint(userController, url_prefix='/api')
