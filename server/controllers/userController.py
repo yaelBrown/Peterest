@@ -10,7 +10,7 @@ userController = Blueprint('userController', __name__)
 _rounds = 12
 _nothing = None
 
-con = pymysql.Connect('localhost', 'root', 'codeup', 'Peterest')
+# con = pymysql.Connect('::1', 'root', 'codeup', 'Peterest', 'utf8mb4', cursorclass=pymysql.cursors.DictCursor)
 
 @userController.route('/login')
 def login():
@@ -21,6 +21,7 @@ def register():
   if request.method == 'GET':
     return jsonify({"msg": "This must be a post!"}), 200
   if request.method == 'POST':
+    con = pymysql.Connect(host='localhost', user='root', password='codeup', db='Peterest', charset='utf8', cursorclass=pymysql.cursors.DictCursor, port=3306)
     data = request.get_json()
 
     newUser = {}
@@ -29,11 +30,15 @@ def register():
     newUser["isAdmin"] = False
     newUser["name"] = data["name"]
     print(newUser)
+    try:
+      with con.cursor() as cur:
+        sql = "INSERT INTO users (username, pw, isAdmin, name) values (%s, %s, %s, %s)"
+        cur.execute(sql, (newUser["username"], newUser["pw"], int(newUser["isAdmin"]), newUser["name"]))
+        con.commit()
+    finally:
+      con.close()
 
-    cur = con.cursor()
-    cur.execute("INSERT INTO users (username, pw, isAdmin, name) values (%s, %s, %s, %s)", (newUser["username"], newUser["pw"], int(newUser["isAdmin"]), newUser["name"]))
-
-    return "??"
+  return "??"
 
 @userController.route('/test')
 def test():
