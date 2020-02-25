@@ -34,9 +34,6 @@ def login():
   else:
     return "Invalid login"
 
-
-  return 'You are logged in'
-
 @userController.route('/register', methods=['POST'])
 def register():
   data = request.get_json()
@@ -69,4 +66,4 @@ def test():
 
 
 
-# create login route
+# test login route
