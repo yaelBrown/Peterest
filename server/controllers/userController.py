@@ -12,33 +12,51 @@ _nothing = None
 
 con = pymysql.Connect(host='localhost', user='root', password='codeup', db='Peterest', charset='utf8', cursorclass=pymysql.cursors.DictCursor, port=3306)
 
-@userController.route('/login')
+@userController.route('/login', methods=['POST'])
 def login():
-  return 'You are logged in'
+  data = request.get_data()
 
-@userController.route('/register', methods=['GET', 'POST'])
-def register():
-  if request.method == 'GET':
-    return jsonify({"msg": "This must be a post!"}), 200
-  if request.method == 'POST':
-    data = request.get_json()
+  username = data["username"]
+  password = data["password"]
 
-    newUser = {}
-    newUser["username"] = data["username"]
-    newUser["pw"] = Bcrypt.generate_password_hash(_nothing, data["password"], _rounds)
-    newUser["isAdmin"] = data["isAdmin"]
-    newUser["name"] = data["name"]
-
-    print(newUser)
-    try:
-      with con.cursor() as cur:
-        sql = "INSERT INTO users (username, pw, isAdmin, name) values (%s, %s, %s, %s)"
-        cur.execute(sql, (newUser["username"], newUser["pw"], int(newUser["isAdmin"]), newUser["name"]))
-        con.commit()
-    finally:
+  try:
+    with con.cursor() as cur:
+      sql = "SELECT * FROM users where username = %s"
+      cur.execute(sql, username) # get the user info from database
+      dbUser = cur.fetchone()
+  finally:
       print("\n")
 
-    return {"msg": "New user {} added".format(newUser["username"])}
+  isLoggedIn = Bcrypt.check_password_hash(dbUser["password"], password)
+
+  if isLoggedIn:
+    return dbUser
+  else:
+    return "Invalid login"
+
+
+  return 'You are logged in'
+
+@userController.route('/register', methods=['POST'])
+def register():
+  data = request.get_json()
+
+  newUser = {}
+  newUser["username"] = data["username"]
+  newUser["pw"] = Bcrypt.generate_password_hash(_nothing, data["password"], _rounds)
+  newUser["isAdmin"] = data["isAdmin"]
+  newUser["name"] = data["name"]
+
+  print(newUser)
+  try:
+    with con.cursor() as cur:
+      sql = "INSERT INTO users (username, pw, isAdmin, name) values (%s, %s, %s, %s)"
+      cur.execute(sql, (newUser["username"], newUser["pw"], int(newUser["isAdmin"]), newUser["name"]))
+      con.commit()
+  finally:
+    print("\n")
+
+  return {"msg": "New user {} added".format(newUser["username"])}
 
 @userController.route('/test')
 def test():
@@ -51,5 +69,4 @@ def test():
 
 
 
-
-  # add sql alchemy to project.
+# create login route
