@@ -14,7 +14,7 @@ con = pymysql.Connect(host='localhost', user='root', password='codeup', db='Pete
 
 @userController.route('/login', methods=['POST'])
 def login():
-  data = request.get_data()
+  data = request.get_json()
 
   username = data["username"]
   password = data["password"]
@@ -27,7 +27,7 @@ def login():
   finally:
       print("\n")
 
-  isLoggedIn = Bcrypt.check_password_hash(dbUser["password"], password)
+  isLoggedIn = Bcrypt.check_password_hash(_nothing, dbUser["pw"], password)
 
   if isLoggedIn:
     return dbUser
@@ -66,4 +66,4 @@ def test():
 
 
 
-# test login route
+# remove password from output to frontend upon succesful login
