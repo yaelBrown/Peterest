@@ -110,9 +110,4 @@ def delete():
 
 @userController.route('/test')
 def test():
-  password = 'hunter2'
-  print("pw is {}".format(password))
-
-  pw_hash = Bcrypt.generate_password_hash(_nothing, password, _rounds)
-
-  return pw_hash
+  return "UserController works"
