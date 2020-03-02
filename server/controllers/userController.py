@@ -30,7 +30,12 @@ def login():
   isLoggedIn = Bcrypt.check_password_hash(_nothing, dbUser["pw"], password)
 
   if isLoggedIn:
-    return dbUser
+    out = {}
+    out["id"] = dbUser["id"]
+    out["username"] = dbUser["username"]
+    out["isAdmin"] = dbUser["isAdmin"]
+    out["name"] = dbUser["name"]
+    return out
   else:
     return "Invalid login"
 
@@ -55,6 +60,54 @@ def register():
 
   return {"msg": "New user {} added".format(newUser["username"])}
 
+@userController.route('/edit', methods=['POST'])
+def edit():
+  data = request.get_json()
+
+  try:
+    with con.cursor() as cur:
+      sql = "SELECT * FROM users WHERE id = %s"
+      cur.execute(sql, data["id"])
+      dbUser = cur.fetchone()
+
+      if dbUser == None:
+        return "User ID not found"
+
+      sql = "UPDATE users SET isAdmin=%s, name=%s, pw=%s, username=%s where id=%s"
+      cur.execute(sql, (data["isAdmin"], data["name"], data["pw"], data["username"], data["id"]))
+      con.commit()
+
+      out = {}
+      out["id"] = data["id"]
+      out["username"] = data["username"]
+      out["isAdmin"] = data["isAdmin"]
+      out["name"] = data["name"]
+      return out
+  finally:
+    print("\n")
+
+  return dbUser
+
+@userController.route('/delete', methods=["POST"])
+def delete():
+  data = request.get_json()
+
+  try:
+    with con.cursor() as cur:
+      sql = "SELECT * FROM users WHERE id = %s"
+      cur.execute(sql, data["id"])
+      dbUser = cur.fetchone()
+
+      if dbUser == None:
+        return "User ID not found"
+
+      sql = "DELETE FROM users WHERE id=%s"
+      cur.execute(sql, data["id"])
+      con.commit()
+      return "User was deleted"
+  finally:
+    print("\n")
+
 @userController.route('/test')
 def test():
   password = 'hunter2'
@@ -63,7 +116,3 @@ def test():
   pw_hash = Bcrypt.generate_password_hash(_nothing, password, _rounds)
 
   return pw_hash
-
-
-
-# remove password from output to frontend upon succesful login
