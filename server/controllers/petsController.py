@@ -1,0 +1,9 @@
+"""
+  Pets
+    id
+    ownerId
+    catOrDog
+    name
+    Birthday
+    pictureURL
+"""

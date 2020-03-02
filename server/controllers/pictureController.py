@@ -1,0 +1,10 @@
+"""
+picture
+  id
+  author
+  datetime
+  caption
+  imgUrl
+  likes
+  comments
+"""
