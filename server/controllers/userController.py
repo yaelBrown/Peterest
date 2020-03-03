@@ -2,15 +2,14 @@ from flask import Flask, request, Blueprint, jsonify
 from flask_bcrypt import Bcrypt
 from flask_mysqldb import MySQL
 
+from config.dbController import con
+
 import json
-import pymysql
 
 userController = Blueprint('userController', __name__)
 
 _rounds = 12
 _nothing = None
-
-con = pymysql.Connect(host='localhost', user='root', password='codeup', db='Peterest', charset='utf8', cursorclass=pymysql.cursors.DictCursor, port=3306)
 
 @userController.route('/login', methods=['POST'])
 def login():

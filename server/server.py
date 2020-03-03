@@ -3,6 +3,7 @@ from flask_mysqldb import MySQL
 from flask_cors import CORS
 
 from controllers.userController import userController
+from controllers.petsController import petsController
 
 app = Flask(__name__)
 
@@ -16,7 +17,8 @@ mysql = MySQL(app)
 
 CORS(app)
 
-app.register_blueprint(userController, url_prefix='/api')
+app.register_blueprint(userController, url_prefix='/api/users/')
+app.register_blueprint(petsController, url_prefix='/api/pets/')
 
 @app.route("/")
 def index():
