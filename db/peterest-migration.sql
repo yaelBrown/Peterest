@@ -18,11 +18,11 @@ insert into users (username, pw, isAdmin, name) values ("yael", "yael", False, "
 
 create table pets (
   id int not null primary key auto_increment,
-  owner_Id int,
+  owner_id int,
   catOrDog boolean NOT NULL,
   name varchar(50) not null,
   birthday DATE not null,
   gender boolean not null,
   pictureUrl varchar(255),
-  FOREIGN KEY owner_Id REFERENCES users(id)
+  FOREIGN KEY (owner_id) REFERENCES users(id)
 );
