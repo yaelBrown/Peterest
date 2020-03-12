@@ -8,13 +8,14 @@ services:
       - 5000:5000
   client_nginx:
     build: ./client
-    volumes: :
+    volumes:
       - ./client:/user/src/client
     ports:
       - 80:80
       - 8080:8080
   db_mysql:
     build: ./db
-      - ./db:/user/src/db
+    volumes:
+      - ./db/:/user/src/db
     ports:
       - 3306:3306
