@@ -59,7 +59,7 @@ def register():
 
   return {"msg": "New user {} added".format(newUser["username"])}
 
-@userController.route('/edit', methods=['POST'])
+@userController.route('/edit', methods=["PUT"])
 def edit():
   data = request.get_json()
 
