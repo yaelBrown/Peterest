@@ -25,11 +25,11 @@ def createPet():
 
   try:
     with con.cursor() as cur:
-      sql = "INSERT INTO pets (owner_id, catOrDog, name, birthday, gender, pictureUrl) values (%s, %s, %s, %s, %s)"
+      sql = "INSERT INTO pets (owner_id, catOrDog, name, birthday, gender, pictureUrl) values (%s, %s, %s, %s, %s, %s)"
       cur.execute(sql, (newPet["owner_id"], newPet["catOrDog"], newPet["name"], newPet["birthday"], newPet["gender"], newPet["pictureUrl"]))
       con.commit()
-  except:
-    return {"msg": "Unable to add {}: {}".format(newPet["name"], sys.exec_info()[0])}, 400
+  except Exception as e:
+    return {"msg": "Unable to add {}: {}".format(newPet["name"], e)}, 400
   finally:
     print("\n")
 
@@ -144,4 +144,4 @@ def deletePet():
 def test():
   return "PetsContoller works"
 
-# Create CRUD functionality for pets controller and tests
+# test
