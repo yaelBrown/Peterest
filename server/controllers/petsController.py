@@ -39,25 +39,24 @@ def createPet():
 def getPet():
   data = request.get_json()
 
-  pet = data["id"]
-
   try:
     with con.cursor() as cur:
-      sql = "SELECT * FROM users where id = %s"
+      sql = "SELECT * FROM pets where id = %s"
       cur.execute(sql, data["id"])
       dbPet = cur.fetchone()
-  except:
-    return {"msg": "{} was not found: {}".format(pet, sys.exec_info()[0])}
+
+      out = {}
+      out["msg"] = "{} found".format(dbPet["name"])
+      out["pet"] = dbPet
+      return out, 200
+  except Exception as e:
+    return {"msg": "{} was not found: {}".format(data["id"], e)}
   finally:
     print("\n")
 
-  out = {}
-  out["msg"] = "{} found".format(dbPet["name"])
-  out["pet"] = dbPet
-  return {out, 200}
-
 @petsController.route('/getPets', methods=['GET'])
 def getPets():
+  """ Find all pets by user """
   data = request.get_json()
 
   pets = data["id"]
