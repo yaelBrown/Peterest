@@ -26,3 +26,5 @@ create table pets (
   pictureUrl varchar(255),
   FOREIGN KEY (owner_id) REFERENCES users(id)
 );
+
+INSERT INTO pets VALUES (2,15,1,'Fluffy','2020-02-12',1,'https://cdn2.thecatapi.com/images/MTc3NDcwNQ.jpg'),(3,15,1,'Quibbles','2020-02-12',1,'https://cdn2.thecatapi.com/images/MTc3NDcwNQ.jpg'),(5,15,0,'sniffles','2020-02-12',1,'https://cdn2.thecatapi.com/images/MTc3NDcwNQ.jpg');
