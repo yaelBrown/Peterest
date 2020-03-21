@@ -4,6 +4,7 @@ from flask_cors import CORS
 
 from controllers.userController import userController
 from controllers.petsController import petsController
+from controllers.dashboardController import dashboardController
 
 app = Flask(__name__)
 
@@ -19,6 +20,7 @@ CORS(app)
 
 app.register_blueprint(userController, url_prefix='/api/users/')
 app.register_blueprint(petsController, url_prefix='/api/pets/')
+app.register_blueprint(dashboardController, url_prefix='/api/dashboard/')
 
 @app.route("/")
 def index():
