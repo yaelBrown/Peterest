@@ -59,7 +59,7 @@ def getPets():
   """ Find all pets by user """
   data = request.get_json()
 
-  pets = data["id"]
+  pets = data["ids"]
   if len(pets) <= 1:
     return {"msg": "You need to use /getPet for this request"}, 400
 
@@ -82,9 +82,10 @@ def getPets():
     dbPets.append(row)
 
   out = {}
-  out["msg"] = "{} found".format(dbPet["name"])
+  out["msg"] = "pets found"
   out["pets"] = dbPets
-  return {out, 200}
+  print(str(out))
+  return out, 200
 
 @petsController.route('/edit', methods=["PUT"])
 def editPet():
@@ -108,12 +109,13 @@ def editPet():
         return {"msg": "{} was not found :(".format(newPetData["name"])}
 
       sql = "UPDATE pets SET owner_id=%s, catOrDog=%s, name=%s, birthday=%s, gender=%s, pictureUrl=%s where id=%s"
-      cur.execute(sql, (newPetData["owner_id"], newPetData["catOrDog"], newPetData["name"], newPetData["birthday"], newPetData["gender"], newPetData["pictureUrl"], newPetData["id"]))
+      cur.execute(sql, (newPetData["owner_id"], newPetData["catOrDog"], newPetData["name"], newPetData["birthday"], newPetData["gender"], newPetData["pictureUrl"], data["id"]))
 
       con.commit()
       return {"msg": "Updated {}".format(newPetData["name"]), "newPetData": newPetData}, 200
   except:
-    return {"msg": "unable to update {}: {}".format(newPetData["name"], sys.exec_info()[0])}
+    print(sys.exc_info()[0])
+    return {"msg": "unable to update {}".format(newPetData["name"])}
   finally:
     print("\n")
 
