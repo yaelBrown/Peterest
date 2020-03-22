@@ -18,9 +18,10 @@
 <style>
   #headerMenu {
     list-style-type: none;
-    text-decoration: none;
     display: flex;
+    text-decoration: none;
     flex-direction: row;
+    justify-content: flex-end;
   }
 
   #headerMenu li {
