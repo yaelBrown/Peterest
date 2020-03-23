@@ -1,6 +1,7 @@
 """
   comments
     id
+    conversationId
     author
     datetime
     msg
