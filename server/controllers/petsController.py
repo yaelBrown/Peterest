@@ -13,17 +13,17 @@ _nothing = None
 
 @petsController.route('/create', methods=['POST'])
 def createPet():
-  data = request.get_json()
-
-  newPet = {}
-  newPet["owner_id"] = data['owner_id']
-  newPet["catOrDog"] = data['catOrDog']
-  newPet["name"] = data['name']
-  newPet["birthday"] = data['birthday']
-  newPet["gender"] = data['gender']
-  newPet["pictureUrl"] = data['pictureUrl']
-
   try:
+    data = request.get_json()
+
+    newPet = {}
+    newPet["owner_id"] = data['owner_id']
+    newPet["catOrDog"] = data['catOrDog']
+    newPet["name"] = data['name']
+    newPet["birthday"] = data['birthday']
+    newPet["gender"] = data['gender']
+    newPet["pictureUrl"] = data['pictureUrl']
+
     with con.cursor() as cur:
       sql = "INSERT INTO pets (owner_id, catOrDog, name, birthday, gender, pictureUrl) values (%s, %s, %s, %s, %s, %s)"
       cur.execute(sql, (newPet["owner_id"], newPet["catOrDog"], newPet["name"], newPet["birthday"], newPet["gender"], newPet["pictureUrl"]))
@@ -37,9 +37,9 @@ def createPet():
 
 @petsController.route('/getPet', methods=['GET'])
 def getPet():
-  data = request.get_json()
-
   try:
+    data = request.get_json()
+
     with con.cursor() as cur:
       sql = "SELECT * FROM pets where id = %s"
       cur.execute(sql, data["id"])
@@ -54,21 +54,21 @@ def getPet():
   finally:
     print("\n")
 
+""" Find all pets by user """
 @petsController.route('/getPets', methods=['GET'])
 def getPets():
-  """ Find all pets by user """
-  data = request.get_json()
-
-  pets = data["ids"]
-  if len(pets) <= 1:
-    return {"msg": "You need to use /getPet for this request"}, 400
-
-  sql = "SELECT * FROM pets WHERE id IN ("
-  for pid in pets:
-      sql += "{}, ".format(pid)
-  sql = sql[0:-2] + ")"
-
   try:
+    data = request.get_json()
+
+    pets = data["ids"]
+    if len(pets) <= 1:
+      return {"msg": "You need to use /getPet for this request"}, 400
+
+    sql = "SELECT * FROM pets WHERE id IN ("
+    for pid in pets:
+        sql += "{}, ".format(pid)
+    sql = sql[0:-2] + ")"
+
     with con.cursor() as cur:
       cur.execute(sql)
       rows = cur.fetchmany(size=len(pets))
@@ -89,17 +89,17 @@ def getPets():
 
 @petsController.route('/edit', methods=["PUT"])
 def editPet():
-  data = request.get_json()
-
-  newPetData = {}
-  newPetData["owner_id"] = data['owner_id']
-  newPetData["catOrDog"] = data['catOrDog']
-  newPetData["name"] = data['name']
-  newPetData["birthday"] = data['birthday']
-  newPetData["gender"] = data['gender']
-  newPetData["pictureUrl"] = data['pictureUrl']
-
   try:
+    data = request.get_json()
+
+    newPetData = {}
+    newPetData["owner_id"] = data['owner_id']
+    newPetData["catOrDog"] = data['catOrDog']
+    newPetData["name"] = data['name']
+    newPetData["birthday"] = data['birthday']
+    newPetData["gender"] = data['gender']
+    newPetData["pictureUrl"] = data['pictureUrl']
+
     with con.cursor() as cur:
       sql = "SELECT * FROM pets Where id = %s"
       cur.execute(sql, data["id"])
@@ -121,9 +121,9 @@ def editPet():
 
 @petsController.route('/delete', methods=["DELETE"])
 def deletePet():
-  data = request.get_json()
-
   try:
+    data = request.get_json()
+
     with con.cursor() as cur:
       sql = "SELECT * FROM pets Where id = %s"
       cur.execute(sql, data["id"])
@@ -144,5 +144,3 @@ def deletePet():
 @petsController.route('/test', methods=['GET'])
 def test():
   return "PetsContoller works"
-
-# test

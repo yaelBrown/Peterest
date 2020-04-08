@@ -32,3 +32,5 @@ def index():
 
 if __name__ == "__main__":
   app.run(port=5000, debug=True)
+
+# Remove test routes when all controllers are completed

@@ -7,6 +7,7 @@ picture
   caption
   imgUrl
   likes
+  pet_id
 """
 
 from flask import Flask, request, Blueprint, jsonify
@@ -25,25 +26,57 @@ pictureController = Blueprint('pictureController', __name__)
 
 _nothing = None
 
+# dynamically get one or many pictures of pets
 @pictureController.route('/getPics')
 def getPics():
-  pass
+  query = {}
+  try:
+    data = request.get_json()
+    qStr = ""
+    qVal = ""
+
+    for k, v in data.items():
+      if v != None:
+        query[k] = v
+        qStr = k
+        qVal = v
+
+    with con.cursor() as cur:
+      sql = f"SELECT * FROM pictures WHERE {qStr} = {qVal}"
+      cur.execute(sql)
+      rows = cur.fetchall()
+
+    out = []
+    for row in rows:
+      out.append(row)
+
+    print(query)
+    print(out)
+    return {"data": out}, 200
+  except Exception as e:
+    return {"msg": "Unable to get picture(s): {}".format(e)}, 400
+  finally:
+    print("\n")
 
 @pictureController.route('/addPic', methods=['POST'])
 def addPictures():
-  data = request.get_json()
   now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
   try:
+    data = request.get_json()
+
     newPic = {}
     newPic["conversation_id"] = math.floor(random.random()*1000000)
     newPic["author_id"] = data["author_id"]
     newPic["caption"] = data["caption"]
     newPic["imgUrl"] = data["imgUrl"]
+    newPic["pet_id"] = data["pet_id"]
+
+    print(newPic)
 
     with con.cursor() as cur:
-      sql = "INSERT INTO pictures (conversation_id, author_id, dt, caption, imgUrl, likes) VALUES (%s, %s, %s, %s, %s, 0)"
-      cur.execute(sql, (newPic["conversation_id"], newPic["author_id"], now, newPic["caption"], newPic["imgUrl"]))
+      sql = "INSERT INTO pictures (conversation_id, author_id, dt, caption, imgUrl, likes, pet_id) VALUES (%s, %s, %s, %s, %s, 0, %s)"
+      cur.execute(sql, (newPic["conversation_id"], newPic["author_id"], now, newPic["caption"], newPic["imgUrl"], newPic["pet_id"]))
       con.commit()
   except Exception as e:
     return {"msg": "Unable to add picture: {}".format(e)}, 400
@@ -56,7 +89,7 @@ def addPictures():
 def editPictures():
   pass
 
-@pictureController.route('/deletePic', method=['DELETE'])
+@pictureController.route('/deletePic', methods=['DELETE'])
 def deletePicture():
   pass
 
@@ -64,4 +97,5 @@ def deletePicture():
 def testPictures():
   return "Picture controller works", 200
 
-# change author_id to pet_id and connect to Pets table.
+# Work on edit picture.
+# Dynamic logic for getting pictures could be converted and used in petsController
