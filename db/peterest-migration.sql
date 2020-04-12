@@ -36,6 +36,7 @@ CREATE TABLE pictures (
   id INT NOT NULL PRIMARY KEY auto_increment,
   conversation_id INT NOT NULL unique,
   author_id INT(10) UNSIGNED NOT NULL,
+  pet_id INT NOT NULL,
   dt DATETIME NOT NUll,
   caption VARCHAR(255),
   imgURL VARCHAR(255),
