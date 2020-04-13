@@ -66,7 +66,7 @@ def addPictures():
     data = request.get_json()
 
     newPic = {}
-    newPic["conversation_id"] = math.floor(random.random()*1000000)
+    newPic["comments"] = []
     newPic["author_id"] = data["author_id"]
     newPic["caption"] = data["caption"]
     newPic["imgUrl"] = data["imgUrl"]
@@ -75,8 +75,8 @@ def addPictures():
     print(newPic)
 
     with con.cursor() as cur:
-      sql = "INSERT INTO pictures (conversation_id, author_id, dt, caption, imgUrl, likes, pet_id) VALUES (%s, %s, %s, %s, %s, 0, %s)"
-      cur.execute(sql, (newPic["conversation_id"], newPic["author_id"], now, newPic["caption"], newPic["imgUrl"], newPic["pet_id"]))
+      sql = "INSERT INTO pictures (comments, author_id, dt, caption, imgUrl, likes, pet_id) VALUES (%s, %s, %s, %s, %s, 0, %s)"
+      cur.execute(sql, (newPic["comments"], newPic["author_id"], now, newPic["caption"], newPic["imgUrl"], newPic["pet_id"]))
       con.commit()
   except Exception as e:
     return {"msg": "Unable to add picture: {}".format(e)}, 400
@@ -87,15 +87,85 @@ def addPictures():
 
 @pictureController.route('/editPic', methods=['PUT'])
 def editPictures():
-  pass
+  try:
+    data = request.get_json()
+
+    editedPic = {}
+    editedPic["id"] = data["id"]
+    editedPic["caption"] = data["caption"]
+    editedPic["pet_id"] = data["pet_id"]
+
+    with con.cursor() as cur:
+      pass
 
 @pictureController.route('/deletePic', methods=['DELETE'])
 def deletePicture():
   pass
+
+@pictureController.route('/comments', methods=['GET', 'PUT', 'DELETE'])
+def pictureComments():
+  try:
+    data = request.get_json()
+
+    pId = data["id"]
+    cIdx = data["commentIndex"]
+    cContent = data["commentContent"]
+
+    def getComments(pictureId):
+      with con.cursor() as cur:
+        sql = f"SELECT comments FROM pictures WHERE ID = {pictureId}"
+        cur.execute(sql)
+        temp = cur.fetchone()
+
+        return temp
+
+    def saveComments(pictureId, cmts):
+      with con.cursor() as cur:
+        sql = f"INSERT INTO pictures (comments) VALUES ({cmts}) WHERE ID = {pictureId}"
+
+    comments = getComments(pId)
+
+    if request.method == 'GET':
+        out = {}
+        out["id"] = pId
+        out["comments"] = comments
+
+        return out, 200
+    elif request.method == 'PUT':
+      if cIdx is None:
+        comments.append(cContent)
+      else:
+        comments.pop(cIdx)
+        comments.insert(cIdx, cContent)
+
+      saveComments(pId, comments)
+
+      out = {}
+      out["msg"] = f"Successfully added comment at index: {cIdx}"
+      out["id"] = pId
+      out["comment"] = cContent
+
+      return out, 200
+    elif request.method == 'DELETE':
+      comments.pop(cIdx)
+      saveComments(pId, comments)
+
+      out = {}
+      out["msg"] = f"Successfully deleted comment at index: {cIdx}"
+      out["id"] = pId
+
+      return out, 200
+    else:
+      return {"msg": "Method must either be GET, PUT, or DELETE"}, 400
+  except Exception as e:
+    return {"msg": f"Unable to modify comments to this picture with id: {pId}"}, 400
+  finally:
+    print("\n")
 
 @pictureController.route('/test', methods=['GET'])
 def testPictures():
   return "Picture controller works", 200
 
 # Work on edit picture.
+# finish edit picture
 # Dynamic logic for getting pictures could be converted and used in petsController

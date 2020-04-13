@@ -34,7 +34,7 @@ INSERT INTO pets VALUES (2,15,1,'Fluffy','2020-02-12',1,'https://cdn2.thecatapi.
 -- pictures table
 CREATE TABLE pictures (
   id INT NOT NULL PRIMARY KEY auto_increment,
-  conversation_id INT NOT NULL unique,
+  comments JSON,
   author_id INT(10) UNSIGNED NOT NULL,
   pet_id INT NOT NULL,
   dt DATETIME NOT NUll,
