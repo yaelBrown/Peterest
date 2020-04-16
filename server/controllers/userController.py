@@ -51,8 +51,8 @@ def register():
   print(newUser)
   try:
     with con.cursor() as cur:
-      sql = "INSERT INTO users (username, pw, isAdmin, name) values (%s, %s, %s, %s)"
-      cur.execute(sql, (newUser["username"], newUser["pw"], int(newUser["isAdmin"]), newUser["name"]))
+      sql = "INSERT INTO users (username, pw, isAdmin, name, settings) values (%s, %s, %s, %s, %s)"
+      cur.execute(sql, (newUser["username"], newUser["pw"], int(newUser["isAdmin"]), newUser["name"], {}))
       con.commit()
   finally:
     print("\n")
@@ -72,8 +72,8 @@ def edit():
       if dbUser == None:
         return "User ID not found"
 
-      sql = "UPDATE users SET isAdmin=%s, name=%s, pw=%s, username=%s where id=%s"
-      cur.execute(sql, (data["isAdmin"], data["name"], data["pw"], data["username"], data["id"]))
+      sql = "UPDATE users SET isAdmin=%s, name=%s, pw=%s, username=%s, settings=%s where id=%s"
+      cur.execute(sql, (data["isAdmin"], data["name"], data["pw"], data["username"], data["settings"], data["id"]))
       con.commit()
 
       out = {}

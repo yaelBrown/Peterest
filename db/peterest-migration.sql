@@ -10,7 +10,8 @@ CREATE TABLE users (
   username VARCHAR(50) unique,
   pw VARCHAR(100),
   isAdmin BOOLEAN NOT NULL,
-  NAME VARCHAR(50)
+  NAME VARCHAR(50),
+  settings JSON
 );
 
 INSERT INTO users (username, pw, isAdmin, NAME) VALUES ("admin", "admin", True, "Admin");
