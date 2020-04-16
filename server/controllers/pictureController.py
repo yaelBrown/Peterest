@@ -96,11 +96,31 @@ def editPictures():
     editedPic["pet_id"] = data["pet_id"]
 
     with con.cursor() as cur:
-      pass
+      sql = "UPDATE pictures SET caption=%s, pet_id=%s WHERE id = %s"
+      cur.execute(sql, (editedPic["caption"], editedPic["pet_id"], editedPic["pet_id"]))
+      con.commit()
+
+    return {"msg": f"Updated picture with ID: {editedPic['id']}", "pet_id": f"{editedPic['pet_id']}", "caption": f"{editedPic['caption']}"}
+  except Exception as e:
+    return {"msg": f"Unable to update picture with id of {editedPic['id']}"}
+  finally:
+    print("\n")
 
 @pictureController.route('/deletePic', methods=['DELETE'])
 def deletePicture():
-  pass
+  try:
+    data = request.get_json()
+
+    with con.cursor() as cur:
+      sql = "DELETE FROM pictures WHERE id = %s"
+      cur.execute(sql, (data["id"]))
+      con.commit()
+
+    return {"msg": f"Deleted picture with id {data['id']}"}
+  except Exception as e:
+    return {"msg": f"Unable to delete picture with id {data['id']}"}
+  finally:
+    print("\n")
 
 @pictureController.route('/comments', methods=['GET', 'PUT', 'DELETE'])
 def pictureComments():
@@ -126,11 +146,11 @@ def pictureComments():
     comments = getComments(pId)
 
     if request.method == 'GET':
-        out = {}
-        out["id"] = pId
-        out["comments"] = comments
+      out = {}
+      out["id"] = pId
+      out["comments"] = comments
 
-        return out, 200
+      return out, 200
     elif request.method == 'PUT':
       if cIdx is None:
         comments.append(cContent)
@@ -166,6 +186,5 @@ def pictureComments():
 def testPictures():
   return "Picture controller works", 200
 
-# Work on edit picture.
-# finish edit picture
+
 # Dynamic logic for getting pictures could be converted and used in petsController
