@@ -6,7 +6,7 @@ services:
       - ./server:/user/src/server
     ports:
       - 5000:5000
-  client_nginx:
+  client_nginx_vue:
     build: ./client
     volumes:
       - ./client:/user/src/client
