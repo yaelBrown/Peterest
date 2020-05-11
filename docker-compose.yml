@@ -1,21 +1,19 @@
-version: '3'
+version: '3.3'
 services:
-  server_flask:
-    build: ./server
-    volumes:
-      - ./server:/user/src/server
+  python:
+    container_name: server_python
     ports:
-      - 5000:5000
-  client_nginx_vue:
-    build: ./client
-    volumes:
-      - ./client:/user/src/client
+        - '5000:5000'
+    image: python
+  nodejs:
+    container_name: client_nodejs
     ports:
-      - 80:80
-      - 8080:8080
-  db_mysql:
-    build: ./db
-    volumes:
-      - ./db/:/user/src/db
+        - '8080:8080'
+    image: node
+  mysql:
+    container_name: db_mysql
     ports:
-      - 3306:3306
+        - '3306:3306'
+    environment:
+        - MYSQL_ROOT_PASSWORD=codeup
+    image: mysql
