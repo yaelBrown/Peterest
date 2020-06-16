@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_mysqldb import MySQL
+# from flask_mysqldb import MySQL
 from flask_cors import CORS
 
 from controllers.userController import userController
@@ -36,3 +36,4 @@ if __name__ == "__main__":
   app.run(port=5000, debug=True)
 
 # Remove test routes when all controllers are completed
+# use mysql connector from mysql people. If that does not work convert to firebase or something

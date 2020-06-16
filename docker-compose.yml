@@ -1,17 +1,27 @@
 version: '3.3'
 services:
   python:
-    container_name: server_python
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    container_name: peterest_server
     ports:
         - '5000:5000'
-    image: python
+    image: 'python:latest'
+    volumes:
+      - './server/:/var/lib/Peterest'
   nodejs:
-    container_name: client_nodejs
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    container_name: peterest_client
     ports:
         - '8080:8080'
-    image: node
+    image: 'node:latest'
+    volumes: 
+      - './client/:/var/lib/Peterest'
   mysql:
-    container_name: db_mysql
+    container_name: peterest_db
     ports:
         - '3306:3306'
     environment:
