@@ -6,6 +6,9 @@ from config.dbController import con
 
 import json
 
+import services.userService as userService
+u = userService.userService()
+
 userController = Blueprint('userController', __name__)
 
 _rounds = 12
@@ -18,29 +21,14 @@ def login():
   username = data["username"]
   password = data["password"]
 
-  try:
-    with con.cursor() as cur:
-      sql = "SELECT * FROM users where username = %s"
-      cur.execute(sql, username) # get the user info from database
-      dbUser = cur.fetchone()
-  finally:
-      print("\n")
-
-  isLoggedIn = Bcrypt.check_password_hash(_nothing, dbUser["pw"], password)
-
-  if isLoggedIn:
-    out = {}
-    out["id"] = dbUser["id"]
-    out["username"] = dbUser["username"]
-    out["isAdmin"] = dbUser["isAdmin"]
-    out["name"] = dbUser["name"]
-    return out
-  else:
-    return "Invalid login"
+  return {"data": u.login(username, password)}, 200
 
 @userController.route('/register', methods=['POST'])
 def register():
   data = request.get_json()
+  
+  if data == None: 
+    return ("msg": "Empty Request"), 422
 
   newUser = {}
   newUser["username"] = data["username"]
@@ -48,64 +36,37 @@ def register():
   newUser["isAdmin"] = data["isAdmin"]
   newUser["name"] = data["name"]
 
-  print(newUser)
-  try:
-    with con.cursor() as cur:
-      sql = "INSERT INTO users (username, pw, isAdmin, name, settings) values (%s, %s, %s, %s, %s)"
-      cur.execute(sql, (newUser["username"], newUser["pw"], int(newUser["isAdmin"]), newUser["name"], {}))
-      con.commit()
-  finally:
-    print("\n")
+  nU = u.register(newUser)
 
-  return {"msg": "New user {} added".format(newUser["username"])}
+  if nU == False:
+    return {"msg": "Unable to create new user"}, 422
+  else: 
+    return {"msg": f"New user {newUser["username"]} added", "data": nU}, 200 
 
 @userController.route('/edit', methods=["PUT"])
 def edit():
   data = request.get_json()
 
-  try:
-    with con.cursor() as cur:
-      sql = "SELECT * FROM users WHERE id = %s"
-      cur.execute(sql, data["id"])
-      dbUser = cur.fetchone()
+  if data == None:
+    return {"msg": "Invalid User Request"}, 422
 
-      if dbUser == None:
-        return "User ID not found"
+  eU = u.edit(data)
 
-      sql = "UPDATE users SET isAdmin=%s, name=%s, pw=%s, username=%s, settings=%s where id=%s"
-      cur.execute(sql, (data["isAdmin"], data["name"], data["pw"], data["username"], data["settings"], data["id"]))
-      con.commit()
-
-      out = {}
-      out["id"] = data["id"]
-      out["username"] = data["username"]
-      out["isAdmin"] = data["isAdmin"]
-      out["name"] = data["name"]
-      return out
-  finally:
-    print("\n")
-
-  return dbUser
+  if eU == False:
+    return {"msg": f"Unable to edit user: {data["username"]}"}, 422
+  else: 
+    return {"msg": f"edited {data['username']}", "data": eU}, 200
 
 @userController.route('/delete', methods=["POST"])
 def delete():
   data = request.get_json()
 
-  try:
-    with con.cursor() as cur:
-      sql = "SELECT * FROM users WHERE id = %s"
-      cur.execute(sql, data["id"])
-      dbUser = cur.fetchone()
+  dU = u.delete()
 
-      if dbUser == None:
-        return "User ID not found"
-
-      sql = "DELETE FROM users WHERE id=%s"
-      cur.execute(sql, data["id"])
-      con.commit()
-      return "User was deleted"
-  finally:
-    print("\n")
+  if dU == False: 
+    return {"msg": f"Unable to delete {data['username']}"}, 422 
+  else:
+    return {"msg": f"deleted user: {data['username']}"}, 200
 
 @userController.route('/test')
 def test():
