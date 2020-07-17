@@ -2,7 +2,8 @@ FROM node:latest
 
 EXPOSE 8080
 
-CMD ["chmod +x /var/lib/Peterest/entryPoint.sh"]
-RUN chmod +x /var/lib/Peterest/entryPoint.sh
+CMD ["chmod +x /var/lib/Peterest_client/entryPoint.sh"]
 
-ENTRYPOINT ["/var/lib/Peterest/entryPoint.sh"]
+RUN chmod +x /var/lib/Peterest_client/entryPoint.sh
+
+ENTRYPOINT ["/var/lib/Peterest_client/entryPoint.sh"]

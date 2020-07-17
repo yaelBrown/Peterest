@@ -1,29 +1,38 @@
 version: '3.3'
 services:
   python:
+    container_name: peterest_server
+    image: 'python:latest'
     build:
       context: .
       dockerfile: ./server/Dockerfile
-    container_name: peterest_server
     ports:
         - '5000:5000'
-    image: 'python:latest'
     volumes:
-      - './server/:/var/lib/Peterest'
+      - './server/:/var/lib/Peterest_api'
   nodejs:
+    container_name: peterest_client
+    image: 'node:latest'
     build:
       context: .
       dockerfile: ./client/Dockerfile
-    container_name: peterest_client
     ports:
         - '8080:8080'
-    image: 'node:latest'
     volumes: 
-      - './client/:/var/lib/Peterest'
+      - './client/:/var/lib/Peterest_client'
   mysql:
     container_name: peterest_db
+    image: mysql:8.0.21
+    build: 
+      context: .
+      dockerfile: './db/dockerfile'
+    restart: always
     ports:
-        - '3306:3306'
+      - '3306:3306'
+    volumes: 
+      - './db/:/var/lib/Peterest_db'
     environment:
-        - MYSQL_ROOT_PASSWORD=codeup
-    image: mysql
+      - MYSQL_ROOT_PASSWORD=petme
+      - MYSQL_DATABASE=peterest
+      - MYSQL_USER=peterest
+      - MYSQL_PASSWORD=petme
