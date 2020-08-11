@@ -1,0 +1,70 @@
+#loginContainer {
+  background-color: green;
+  height: 100vh;
+  width: 100%;
+  margin-top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#loginLeft {
+  flex-grow: 2;
+  /* background: url(../img/lilgriffybob.jpg); */
+  background-repeat: no-repeat;
+  background-size: auto;
+  min-width: 60%;
+  filter: blur(2px);
+}
+
+#leftBgImage {
+  width: auto;
+  height: 100%;
+  object-fit: cover;
+}
+
+#loginRight {
+  background: url(../img/memphis-colorful.png);
+  /* background: #343838; */
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  min-width: 40%;
+  -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.43); 
+  box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.43);
+  z-index: 100;
+}
+
+#loginForm {
+  margin: auto;
+  background: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 2rem;
+  display: inherit;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.loginFormRows {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  margin: .5rem
+}
+
+.loginFormRows input {
+  height: 1.5rem;
+  align-items: center;
+  margin: auto 1rem;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.loginFormRows button {
+  margin: auto 1rem;
+  padding: .5rem;
+}
