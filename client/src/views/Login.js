@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import '../assets/css/Login.css';
 import PeterestLogo from '../components/PeterestLogo';
 
@@ -15,25 +15,22 @@ export default function Login() {
             <h3>A place for pets</h3>
               <form>
                 <p>Login :)</p>
-                <div class="loginFormR1" className="loginFormRows">
+                <div className="loginFormRows">
                   <h3>Username</h3>
                   <input id="username" type="text"></input>
                 </div>
-                <div class="loginFormR2" className="loginFormRows">
+                <div className="loginFormRows">
                   <h3>Password</h3>
                   <input id="password" type="password"></input>  
                 </div>
-                <div class="loginFormR3" className="loginFormRows">
+                <div className="loginFormRows">
                   <button type="submit">Submit</button>
                   <button type="">Register</button>
                 </div>
               </form>
           </div>
         </div>
-
       </div>
-
-
     </div>
   )
 }

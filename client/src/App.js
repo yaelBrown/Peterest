@@ -3,13 +3,18 @@ import Login from './views/Login';
 // import './assets/css/Reset.css';
 import './assets/css/App.css';
 
+import Router from './Router.js';
+
 function App() {
   return (
-    <div className="App">
-      <div class="container">
-        <Login/>
+    <BrowserRouter>
+      <div className="App">
+        <div class="container">
+          <Router/>
+          <Login/>
+        </div>
       </div>
-    </div>
+    </BrowserRouter>
   );
 }
 

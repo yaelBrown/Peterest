@@ -28,7 +28,10 @@ def register():
   data = request.get_json()
   
   if data == None: 
-    return ("msg": "Empty Request"), 422
+    return {"msg": "Empty Request"}, 422
+
+  if "isAdmin" not in data.keys():
+    data["isAdmin"] = False
 
   newUser = {}
   newUser["username"] = data["username"]
