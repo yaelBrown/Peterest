@@ -1,5 +1,5 @@
 #loginContainer {
-  background-color: green;
+  background-color: white;
   height: 100vh;
   width: 100%;
   margin-top: 0;
@@ -14,7 +14,7 @@
   background-repeat: no-repeat;
   background-size: auto;
   min-width: 60%;
-  filter: blur(2px);
+  /* filter: blur(1px); */
 }
 
 #leftBgImage {

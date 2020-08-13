@@ -27,6 +27,9 @@ export default function Login() {
                   <button type="submit">Submit</button>
                   <button type="">Register</button>
                 </div>
+                <div className="loginFormRows">
+                  <a href="/forgot">Forgot your account?</a>
+                </div>
               </form>
           </div>
         </div>

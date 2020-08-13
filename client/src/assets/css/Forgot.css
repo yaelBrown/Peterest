@@ -1,4 +1,4 @@
-#registerContainer {
+#forgotContainer {
   background-color: #fff;
   background: url(../img/memphis-colorful.png);
   height: 100vh;
@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-#registerForm {
+#forgotForm {
   background: #fff;
   max-width: 500px;
   border: 1px solid #000;
@@ -20,23 +20,19 @@
   padding: 3rem;
 }
 
-.registerFormRows {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  text-align: center;
-  margin: 1.5rem
+#forgotForm p {
+  margin: 1.5rem auto 3rem auto;
 }
 
-.registerFormRows input, #registerTable input {
+#forgotForm input {
   height: 1.5rem;
+  width: auto;
   align-items: center;
-  margin: auto 1rem;
   padding: 1rem;
   font-size: 1rem;
 }
 
-.registerFormRows button {
-  margin: auto 1rem;
+#forgotForm button {
+  margin: auto 1rem 1rem 1rem;
   padding: .5rem;
 }

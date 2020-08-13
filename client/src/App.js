@@ -1,5 +1,6 @@
 import React from 'react';
-import Login from './views/Login';
+import { BrowserRouter } from 'react-router-dom';
+
 // import './assets/css/Reset.css';
 import './assets/css/App.css';
 
@@ -11,7 +12,6 @@ function App() {
       <div className="App">
         <div class="container">
           <Router/>
-          <Login/>
         </div>
       </div>
     </BrowserRouter>
