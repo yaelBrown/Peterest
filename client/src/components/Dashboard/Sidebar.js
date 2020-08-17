@@ -3,6 +3,7 @@ import React from 'react';
 import '../../assets/css/Sidebar.css';
 import EditIcon from '@material-ui/icons/Edit';
 import PetsIcon from '@material-ui/icons/Pets';
+import AlbumIcon from '@material-ui/icons/PhotoAlbum';
 
 export default class Sidebar extends React.Component {
 
@@ -22,6 +23,10 @@ export default class Sidebar extends React.Component {
             <tr>
               <td><PetsIcon className="sidebarTableIcons"/></td>
               <td><p className="sidebarTableLabels sbTL">Edit Pets</p></td>
+            </tr>
+            <tr>
+              <td><AlbumIcon className="sidebarTableIcons"/></td>
+              <td><p className="sidebarTableLabels sbTL">Edit Albums</p></td>
             </tr>
           </table>
         </div>

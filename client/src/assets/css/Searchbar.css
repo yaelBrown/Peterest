@@ -1,0 +1,20 @@
+#sbContainer {
+  width: 100%;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+#sb {
+  padding: 1rem;
+  margin: 1rem .2rem;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1px solid #000;
+  position: absolute;
+}
+
