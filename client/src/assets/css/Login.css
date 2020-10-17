@@ -31,6 +31,7 @@
   flex-direction: column;
   flex-grow: 0;
   min-width: 40%;
+  width: 100%;
   -webkit-box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.43); 
   box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.43);
   z-index: 100;
@@ -48,12 +49,23 @@
   text-align: center;
 }
 
+#loginForm form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.loginTableInputField {
+  padding: 8px;
+  margin: 0px;
+}
+
 .loginFormRows {
   display: flex;
   flex-direction: row;
   justify-content: center;
   text-align: center;
-  margin: .5rem
+  margin: .3rem;
 }
 
 .loginFormRows input {
