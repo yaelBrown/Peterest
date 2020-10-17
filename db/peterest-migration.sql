@@ -26,8 +26,7 @@ CREATE TABLE pets (
   NAME VARCHAR(50) NOT NULL,
   birthday DATE NOT NULL,
   gender BOOLEAN NOT NULL,
-  pictureUrl VARCHAR(255),
-  FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE
+  pictureUrl VARCHAR(255)
 );
 
 INSERT INTO pets VALUES (2,15,1,'Fluffy','2020-02-12',1,'https://cdn2.thecatapi.com/images/MTc3NDcwNQ.jpg'),(3,15,1,'Quibbles','2020-02-12',1,'https://cdn2.thecatapi.com/images/MTc3NDcwNQ.jpg'),(5,15,0,'sniffles','2020-02-12',1,'https://cdn2.thecatapi.com/images/MTc3NDcwNQ.jpg');
@@ -41,6 +40,5 @@ CREATE TABLE pictures (
   dt DATETIME NOT NUll,
   caption VARCHAR(255),
   imgURL VARCHAR(255),
-  likes INT,
-  FOREIGN KEY (author_id) REFERENCES users(id) ON DELETE CASCADE
+  likes INT
 );

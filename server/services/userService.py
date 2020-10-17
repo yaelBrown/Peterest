@@ -67,13 +67,6 @@ class userService:
 
   def delete(self, u):
     try:
-      sql = "SELECT * FROM users WHERE id = %s"
-      cur.execute(sql, u["id"])
-      dbUser = cur.fetchone()
-
-      if dbUser == None:
-        return "User ID not found"
-
       sql = "DELETE FROM users WHERE id=%s"
       cur.execute(sql, u["id"])
       con.commit()
