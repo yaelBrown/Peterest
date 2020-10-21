@@ -1,6 +1,6 @@
 from flask import Flask, request, Blueprint, jsonify
 from flask_bcrypt import Bcrypt
-from flask_mysqldb import MySQL
+from flaskext.mysql import MySQL
 
 from config.dbController import con
 
@@ -44,7 +44,7 @@ def register():
   if nU == False:
     return {"msg": "Unable to create new user"}, 422
   else: 
-    return {"msg": f"New user {newUser["username"]} added", "data": nU}, 200 
+    return {"msg": f"New user {newUser['username']} added", "data": nU }, 200 
 
 @userController.route('/edit', methods=["PUT"])
 def edit():
@@ -56,7 +56,7 @@ def edit():
   eU = u.edit(data)
 
   if eU == False:
-    return {"msg": f"Unable to edit user: {data["username"]}"}, 422
+    return {"msg": f"Unable to edit user: {data['username']}"}, 422
   else: 
     return {"msg": f"edited {data['username']}", "data": eU}, 200
 
