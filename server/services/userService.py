@@ -1,3 +1,5 @@
+import json
+
 from flask_bcrypt import Bcrypt
 from config.dbController import con
 
@@ -20,7 +22,7 @@ class userService:
       out["id"] = dbUser["id"]
       out["username"] = dbUser["username"]
       out["isAdmin"] = dbUser["isAdmin"]
-      out["name"] = dbUser["name"]
+      out["name"] = dbUser["NAME"]
 
       return out
     else:
@@ -28,8 +30,9 @@ class userService:
 
   def register(self, nU): 
     try:
+      _ = {"test": "cookies"}
       sql = "INSERT INTO users (username, pw, isAdmin, name, settings) values (%s, %s, %s, %s, %s)"
-      cur.execute(sql, (nU["username"], nU["pw"], int(nU["isAdmin"]), nU["name"], {}))
+      cur.execute(sql, (nU["username"], nU["password"], int(nU["isAdmin"]), nU["name"], json.dumps(_)))
       con.commit()
 
       return nU

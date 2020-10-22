@@ -11,7 +11,6 @@ u = userService.userService()
 userController = Blueprint('userController', __name__)
 
 _rounds = 12
-_nothing = None
 
 @userController.route('/login', methods=['POST'])
 def login():
@@ -20,7 +19,12 @@ def login():
   username = data["username"]
   password = data["password"]
 
-  return {"data": u.login(username, password)}, 200
+  out = u.login(username, password)
+
+  if out != False: 
+    pass # insert jwt encode : https://pyjwt.readthedocs.io/en/latest/
+
+  return {"data": out}, 200
 
 @userController.route('/register', methods=['POST'])
 def register():
@@ -34,7 +38,7 @@ def register():
 
   newUser = {}
   newUser["username"] = data["username"]
-  newUser["pw"] = Bcrypt.generate_password_hash(_nothing, data["password"], _rounds)
+  newUser["password"] = Bcrypt.generate_password_hash(None, data["password"], _rounds)
   newUser["isAdmin"] = data["isAdmin"]
   newUser["name"] = data["name"]
 
