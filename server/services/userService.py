@@ -1,5 +1,5 @@
 from flask_bcrypt import Bcrypt
-from ..config.dbController import con
+from config.dbController import con
 
 cur = con.cursor()
 

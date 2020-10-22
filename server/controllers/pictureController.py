@@ -12,7 +12,6 @@ picture
 
 from flask import Flask, request, Blueprint, jsonify
 from flask_bcrypt import Bcrypt
-from flask_mysqldb import MySQL
 from datetime import datetime
 
 from config.dbController import con

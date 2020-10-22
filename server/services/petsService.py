@@ -1,4 +1,4 @@
-from ..config.dbController import con
+from config.dbController import con
 
 cur = con.cursor()
 
@@ -10,7 +10,7 @@ class petsService:
       cur.execute(sql, (nP["owner_id"], nP["catOrDog"], nP["name"], nP["birthday"], nP["gender"], nP["pictureUrl"]))
       con.commit()
 
-      return {"msg": "Successfully Created new pet", "data": f{nP}}, 200
+      return {"msg": "Successfully Created new pet", "data": f"{nP}"}, 200
     except Exception as e: 
       print(e)
       return {"msg": "Unable to add {}: {}".format(newPet["name"], e)}, 400

@@ -10,4 +10,4 @@ connection = pymysql.connect(host='localhost',
   cursorclass=pymysql.cursors.DictCursor)
 
 
-print("cookies")
+print("\nDatabase Connection works!\n")

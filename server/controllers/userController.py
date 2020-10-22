@@ -1,6 +1,5 @@
 from flask import Flask, request, Blueprint, jsonify
 from flask_bcrypt import Bcrypt
-from flaskext.mysql import MySQL
 
 from config.dbController import con
 

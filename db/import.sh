@@ -1,1 +1,1 @@
-mysql -u root -p Peterest < peterest-migration.spl
+mysql -u root -p Peterest < peterest-migration.sql
