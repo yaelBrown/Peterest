@@ -51,10 +51,12 @@ class userService:
       if dbUser == None:
         return "User ID not found"
 
+      u["pw"] = Bcrypt.generate_password_hash(None, u["pw"], 12)
+
       sql = "UPDATE users SET isAdmin=%s, name=%s, pw=%s, username=%s, settings=%s where id=%s"
       cur.execute(sql, (u["isAdmin"], u["name"], u["pw"], u["username"], u["settings"], u["id"]))
       con.commit()
-
+      
       out = {}
       out["id"] = u["id"]
       out["username"] = u["username"]
@@ -74,7 +76,7 @@ class userService:
       cur.execute(sql, u["id"])
       con.commit()
       
-      return f"{u['username']} was deleted"
+      return f"User with ID: {u['id']}, was deleted"
     except Exception as e:
       print(e)
       return False

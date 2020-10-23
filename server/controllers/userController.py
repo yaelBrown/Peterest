@@ -25,7 +25,6 @@ def login():
   if out != False: 
     out = jwt.encode(out, 'secret', algorithm='HS256')
 
-  print(out)  
   return {"data": str(out)[2:len(out)-1]}, 200
 
 @userController.route('/register', methods=['POST'])
@@ -54,28 +53,21 @@ def register():
 @userController.route('/edit', methods=["PUT"])
 def edit():
   data = request.get_json()
-
+  print(data)
   if data == None:
     return {"msg": "Invalid User Request"}, 422
 
   eU = u.edit(data)
 
-  if eU == False:
-    return {"msg": f"Unable to edit user: {data['username']}"}, 422
-  else: 
-    return {"msg": f"edited {data['username']}", "data": eU}, 200
+  return {"msg": f"edited {data['username']}", "data": eU}, 200
 
-@userController.route('/delete', methods=["POST"])
+@userController.route('/delete', methods=["DELETE"])
 def delete():
   data = request.get_json()
 
-  dU = u.delete()
+  dU = u.delete(data)
 
   if dU == False: 
-    return {"msg": f"Unable to delete {data['username']}"}, 422 
+    return {"msg": f"Unable to delete {data['id']}"}, 422 
   else:
-    return {"msg": f"deleted user: {data['username']}"}, 200
-
-@userController.route('/test')
-def test():
-  return "UserController works"
+    return {"msg": f"deleted user: {data['id']}"}, 200
