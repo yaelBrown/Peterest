@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from config.dbController import con
 
 import json
+import jwt
 
 import services.userService as userService
 u = userService.userService()
@@ -22,9 +23,10 @@ def login():
   out = u.login(username, password)
 
   if out != False: 
-    pass # insert jwt encode : https://pyjwt.readthedocs.io/en/latest/
+    out = jwt.encode(out, 'secret', algorithm='HS256')
 
-  return {"data": out}, 200
+  print(out)  
+  return {"data": str(out)[2:len(out)-1]}, 200
 
 @userController.route('/register', methods=['POST'])
 def register():
