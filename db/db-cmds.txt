@@ -1,0 +1,9 @@
+Backup db: 
+
+mysqldump -u root -p Peterest > db.sql
+
+
+
+Import db: 
+
+mysql -u root -p Peterest < db.sql

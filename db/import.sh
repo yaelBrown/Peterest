@@ -1,1 +1,0 @@
-mysql -u root -p Peterest < peterest-migration.sql
