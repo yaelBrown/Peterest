@@ -1,7 +1,7 @@
 import React from 'react'
 
 import '../assets/css/Forgot.css';
-import PeterestLogo from '../components/PeterestLogo';
+import PeterestLogo from '../PeterestLogo';
 
 export default function Forgot() {
   return (

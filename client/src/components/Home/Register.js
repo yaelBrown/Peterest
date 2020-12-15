@@ -1,6 +1,6 @@
 import React from 'react';
 import '../assets/css/Register.css';
-import PeterestLogo from '../components/PeterestLogo';
+import PeterestLogo from '../PeterestLogo';
 
 export default function Register() {
   return (

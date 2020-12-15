@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../assets/css/Login.css';
-import PeterestLogo from '../components/PeterestLogo';
+import PeterestLogo from '../PeterestLogo';
 
 class Login extends React.Component {
   constructor(props) {

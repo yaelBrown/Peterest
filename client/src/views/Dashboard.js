@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 import '../assets/css/Dashboard.css';
 
-import Sidebar from '../components/Dashboard/Sidebar.js';
-import Feed from '../components/Dashboard/Feed.js';
+import Sidebar from '../Components/Dashboard/Sidebar.js';
+import Feed from '../Components/Dashboard/Feed.js';
 
 export default class Dashboard extends Component {
   constructor(props) {
