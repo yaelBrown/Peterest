@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Searchbar from './Searchbar.js';
+import Searchbar from '../Dashboard/Searchbar.js';
 
 import '../../assets/css/Feed.css';
 
