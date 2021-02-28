@@ -1,3 +1,0 @@
-"""
-  used to manage notifications
-"""
