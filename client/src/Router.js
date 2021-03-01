@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
 
-import Home from "./views/Home.js";
+import Home from "./Views/Home.js";
 // import Dashboard from "./views/Dashboard.js";
 // import Friends from "./views/Friends.js";
 // import Settings from "./views/Settings.js";
