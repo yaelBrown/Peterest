@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
 
+import Test from "./Views/Test.js";
 import Home from "./Views/Home.js";
 // import Dashboard from "./views/Dashboard.js";
 // import Friends from "./views/Friends.js";
@@ -13,6 +14,7 @@ export default class Router extends Component {
     return (
       <Switch>
         <Route path="/" exact component={Home}/>
+        <Route path="/test" exact component={Test}/>
         {/* <Route path="/dashboard" exact component={Dashboard}/>
         <Route path="/friends" exact component={Friends}/>
         <Route path="/settings" exact component={Settings}/>
