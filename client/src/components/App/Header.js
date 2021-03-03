@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 
-export default class IndexHeader extends Component {
+import whiteLogo from '../../Assets/img/white-logo.svg'
+
+export default class Header extends Component {
   render() {
     return (
       <div>
         <header id="masthead" class="site-header default-header overlay-header menu-color-white user-nav-active">
 	      <nav class="navbar beehive-navbar default fixed-top">
 		      <div class="container">
-			      <a class="navbar-brand" href="https://mythemestore.com/beehive-preview/">
-				      <img src="./index_files/white-logo.svg" title="Beehive Preview" alt="Beehive Preview" class="default-logo"/>
+			      <a class="navbar-brand" href="/">
+				      <img src={whiteLogo} alt="White Logo" className="default-logo"/>
 			      </a>
             <button class="beehive-toggler navbar-icon js-hiraku-offcanvas-btn" type="button" data-toggle-offcanvas="#js-hiraku-offcanvas-0" aria-expanded="false" aria-label="Menu" aria-controls="js-hiraku-offcanvas-0" id="hiraku-offcanvas-btn-0">
               <span class="icon-bar bar1"></span>

@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './Assets/css/index.css';
-import App from './App.js';
 import * as serviceWorker from './serviceWorker';
+import App from './App.js';
+
+import Header from './Components/App/Header';
+import Footer from './Components/App/Footer';
 
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
@@ -16,7 +19,9 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Header/>
+      <App/>
+      <Footer/>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
