@@ -6,7 +6,8 @@ export default class Home extends Component {
       <div>
         <h1>This is the home component</h1>
         <a link href="/test">Goto test</a><br/>
-        <a link href="/index2">Goto index2</a>
+        <a link href="/index2">Goto index2</a><br/>
+        <a link href="/loading">Goto loading</a>
       </div>
     )
   }

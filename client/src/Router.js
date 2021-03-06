@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Test from "./Views/Test.js";
 import Home from "./Views/Home.js";
 import Index2 from "./Views/Index2.js";
+import Loading from "./ReusableComponents/Loading"
 export default class Router extends Component {
   render() {
     return (
@@ -11,6 +12,7 @@ export default class Router extends Component {
         <Route path="/" exact component={Home}/>
         <Route path="/test" exact component={Test}/>
         <Route path="/index2" exact component={Index2}/>
+        <Route path="/loading" exact component={Loading}/>
       </Switch>
     )
   }
