@@ -17,13 +17,13 @@ export default function LinkFooter() {
                             <a title="Home" href="/" className="nav-link">Home</a>
                           </li>
                           <li id="menu-item-127" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-127 nav-item">
-                            <a title="About Us" href="/about-us/" className="nav-link">About Us</a>
+                            <a title="About Us" href="/about" className="nav-link">About Us</a>
                           </li>
                           <li id="menu-item-826" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-826 nav-item">
-                            <a title="Blog" href="https://mythemestore.com/beehive-preview/blog/" className="nav-link">Blog</a>
+                            <a title="Blog" href="/blog" className="nav-link">Blog</a>
                           </li>
                           <li id="menu-item-125" className="menu-item menu-item-type-post_type menu-item-object-page menu-item-125 nav-item">
-                            <a title="Contact" href="https://mythemestore.com/beehive-preview/contact/" className="nav-link">Contact</a>
+                            <a title="Contact" href="/contact" className="nav-link">Contact</a>
                           </li>
                         </ul>
                       </nav>

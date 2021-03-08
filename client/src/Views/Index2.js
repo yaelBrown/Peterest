@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import Loading from '../ReusableComponents/Loading'
+// import Loading from '../ReusableComponents/Loading'
 import BackgroundVideo from '../Components/Home/BackgroundVideo.js'
 import LoginWindow from '../Components/Home/LoginWindow'
 import LinksFooter from '../Components/Home/LinkFooter'
