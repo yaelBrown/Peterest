@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class Feed extends Component {
+export default class Profile extends Component {
   render() {
     return (
       <div>
-        <h1>News Feed</h1>
+        <h1>Profile</h1>
       </div>
     )
   }

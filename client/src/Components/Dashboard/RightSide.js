@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-export default function RightSide() {
-  return (
-    <div>
-      <h3>News and stuff</h3>
-    </div>
-  )
+export default class RightSide extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Right Side</h1>
+      </div>
+    )
+  }
 }

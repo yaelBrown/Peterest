@@ -13,6 +13,7 @@ export default class Index2 extends Component {
     }
   }
   
+  // Create a way for child component to pass info to this component
 
   render() {
     return (

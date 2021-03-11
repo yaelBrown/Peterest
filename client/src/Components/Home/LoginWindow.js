@@ -17,6 +17,8 @@ export default class LoginWindow extends Component {
     }
   }
   
+  // Need to figure out how to pass token to front end. 
+
   handleChange = (property, val) => {
     val = val.trim()
     this.state({[property]: val})
