@@ -5,6 +5,15 @@ import BackgroundVideo from '../Components/Home/BackgroundVideo.js'
 import LoginWindow from '../Components/Home/LoginWindow'
 import LinksFooter from '../Components/Home/LinkFooter'
 export default class Index2 extends Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       view: "login"
+    }
+  }
+  
+
   render() {
     return (
       <div>
