@@ -14,6 +14,9 @@ import Adopt from '../Components/Adopt/Adopt.js'
 import Friends from '../Components/Friends/Friends.js'
 import Profile from '../Components/Profile/Profile.js'
 import Options from '../Components/Options/Options.js'
+import Business from '../Components/Business/Business.js'
+import Jobs from '../Components/Jobs/Jobs.js'
+import Market from '../Components/Market/Market.js'
 
 import DashboardService from '../Services/DashboardService.js'
 import LoginService from '../Services/LoginService.js'
@@ -64,15 +67,18 @@ export default class Dashboard extends Component {
         return <Profile/>
       case "options":
         return <Options/>
+      case "business":
+        return <Business/>
+      case "jobs":
+        return <Jobs/>
+      case "market":
+        return <Market/>
       default: 
         return <UserFeed/>
     }
   }
 
   render() {
-    const styleHidden = {display: "none"}
-    const styleVisible = {display: "initial"}
-
     if (this.state.loading) {
       return (
         <div>

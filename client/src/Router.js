@@ -11,9 +11,6 @@ import Loading from "./ReusableComponents/Loading"
 import About from "./Views/About.js";
 import Blog from "./Views/Blog.js";
 import Contact from "./Views/Contact.js";
-// import Business from "./Views/Business.js";
-// import Market from "./Views/Market.js";
-// import Jobs from "./Views/Jobs.js";
 
 import Error from "./Views/Error.js";
 
@@ -35,6 +32,7 @@ export default class Router extends Component {
         <Route path="/market" exact component={Dashboard}/>
         <Route path="/jobs" exact component={Dashboard}/>
         <Route path="/adopt" exact component={Dashboard}/>
+        <Route path="/profile" exact component={Dashboard}/>
 
         <Route path="/u/:handle" exact component={Dashboard}/>
 
