@@ -4,6 +4,8 @@ import React, { Component } from 'react'
 import BackgroundVideo from '../Components/Home/BackgroundVideo.js'
 import LoginWindow from '../Components/Home/LoginWindow'
 import LinksFooter from '../Components/Home/LinkFooter'
+import Register from '../Components/Home/Register'
+import Forget from '../Components/Home/Forgot'
 export default class Index2 extends Component {
   constructor(props) {
     super(props)
@@ -14,6 +16,24 @@ export default class Index2 extends Component {
   }
   
   // Create a way for child component to pass info to this component
+  // Stepper for register fpage
+
+  changeView(v) {
+    this.setState({view: v})
+  }
+
+  displayContent() {
+    switch (this.state.view) {
+      case "login":
+        return <LoginWindow data={{changeView: this.changeView.bind(this)}}/>
+      case "forget":
+        return <Forget data={{changeView: this.changeView.bind(this)}}/>
+      case "register":
+        return <Register data={{changeView: this.changeView.bind(this)}}/>
+      default: 
+        return <LoginWindow data={{changeView: this.changeView.bind(this)}}/>
+    }
+  }
 
   render() {
     return (
@@ -47,7 +67,7 @@ export default class Index2 extends Component {
                                         <div className="elementor-column elementor-col-66 elementor-top-column elementor-element elementor-element-296c3b9" data-id="296c3b9" data-element_type="column">
                                           <div className="elementor-column-wrap elementor-element-populated">
                                             <div className="elementor-widget-wrap">
-                                              <LoginWindow/>
+                                              {this.displayContent()}
                                               <LinksFooter/>
                                             </div>
                                           </div>

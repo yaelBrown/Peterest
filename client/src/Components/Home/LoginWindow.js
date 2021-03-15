@@ -17,6 +17,8 @@ export default class LoginWindow extends Component {
     }
   }
   
+  // cookies = () => console.log("link was clicked")
+
   // Need to figure out how to pass token to front end. 
 
   handleChange = (property, val) => {
@@ -92,7 +94,7 @@ export default class LoginWindow extends Component {
               <div className="elementor-widget-container">
                 <div className="beehive-iconbox-element beehive-element icon-view-framed icon-shape-rounded">
                 <div className="icon-wrapper">
-                  <span class="iconify" data-icon="fluent:people-audience-24-filled" data-inline="false" style={whiteOverride}/>
+                  <span className="iconify" data-icon="fluent:people-audience-24-filled" data-inline="false" style={whiteOverride}/>
                 </div>
                 <div className="iconbox-info">
                   <h4 className="title">Community</h4>
@@ -105,7 +107,7 @@ export default class LoginWindow extends Component {
               <div className="elementor-widget-container">
                 <div className="beehive-iconbox-element beehive-element icon-view-framed icon-shape-rounded">
                 <div className="icon-wrapper">
-                  <span class="iconify" data-icon="ant-design:shopping-cart-outlined" data-inline="false" style={whiteOverride}/>
+                  <span className="iconify" data-icon="ant-design:shopping-cart-outlined" data-inline="false" style={whiteOverride}/>
                 </div>
                 <div className="iconbox-info">
                   <h4 className="title">Online shop</h4>
@@ -118,7 +120,7 @@ export default class LoginWindow extends Component {
               <div className="elementor-widget-container">
                 <div className="beehive-iconbox-element beehive-element icon-view-framed icon-shape-rounded">
                 <div className="icon-wrapper">
-                  <span class="iconify" data-icon="akar-icons:search" data-inline="false" style={whiteOverride}/>
+                  <span className="iconify" data-icon="akar-icons:search" data-inline="false" style={whiteOverride}/>
                 </div>
                 <div className="iconbox-info">
                   <h4 className="title">Job search</h4>
@@ -170,7 +172,7 @@ export default class LoginWindow extends Component {
                           <div className="pass">
                             <label className="screen-reader-text">Password</label>
                             <span className="icon">
-                              <span class="iconify" data-icon="uim:key-skeleton-alt" data-inline="false"></span>
+                              <span className="iconify" data-icon="uim:key-skeleton-alt" data-inline="false"></span>
                             </span>
                             <input 
                               type="password" 
@@ -178,7 +180,7 @@ export default class LoginWindow extends Component {
                               required  
                               placeholder="Password" 
                               value={this.state.password}
-                              onChnage={(e) => this.handleChange("password", e.target.value)} 
+                              onChange={(e) => this.handleChange("password", e.target.value)} 
                             />
                           </div>
                         </div>
@@ -193,7 +195,7 @@ export default class LoginWindow extends Component {
                             </div>
                           <div className="col-6">
                             <div className="forgot-password">
-                              <a href="/">Lost Password?</a>
+                              <a href="#" onClick={() => this.props.data.changeName("forget")}>Lost Password?</a>
                             </div>
                           </div>
                         </div>

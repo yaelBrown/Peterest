@@ -17,6 +17,7 @@ import Options from '../Components/Options/Options.js'
 import Business from '../Components/Business/Business.js'
 import Jobs from '../Components/Jobs/Jobs.js'
 import Market from '../Components/Market/Market.js'
+import Notifications from '../Components/Notifications/Notifications.js'
 
 import DashboardService from '../Services/DashboardService.js'
 import LoginService from '../Services/LoginService.js'
@@ -34,6 +35,7 @@ export default class Dashboard extends Component {
   }
   
   // research websockets
+  // research fileStack for image upload: https://github.com/filestack/filestack-react
 
   componentWillMount() {
     // open websocket
@@ -49,7 +51,7 @@ export default class Dashboard extends Component {
       }
     }
     
-    // newState.loading = false
+    newState.loading = false
     this.setState(newState)
   }
 
@@ -73,6 +75,8 @@ export default class Dashboard extends Component {
         return <Jobs/>
       case "market":
         return <Market/>
+      case "notifications":
+        return <Notifications/>
       default: 
         return <UserFeed/>
     }
@@ -88,13 +92,12 @@ export default class Dashboard extends Component {
     } else {   
       return (
         <div>
-          <h1>Dashboard</h1>
           <LeftSide/>
-          <RightSide/>
+          {/* <RightSide/> */}
           <SearchBar/>
-          <MessengerSidebar/>
+          {/* <MessengerSidebar/>
           <LinksFooter/>
-          {this.displayContent()}
+          {this.displayContent()} */}
         </div>
       )
     }
