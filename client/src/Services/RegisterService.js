@@ -1,3 +1,10 @@
 import axios from 'axios'
-
-// Register user
+import API_URL from '../Api/api'
+export default class RegisterService {
+  constructor() { }
+  registerAccount = () => { 
+    
+    
+    return true 
+  }
+}

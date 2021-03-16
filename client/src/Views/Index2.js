@@ -5,7 +5,7 @@ import BackgroundVideo from '../Components/Home/BackgroundVideo.js'
 import LoginWindow from '../Components/Home/LoginWindow'
 import LinksFooter from '../Components/Home/LinkFooter'
 import Register from '../Components/Home/Register'
-import Forget from '../Components/Home/Forgot'
+import Forgot from '../Components/Home/Forgot'
 export default class Index2 extends Component {
   constructor(props) {
     super(props)
@@ -17,6 +17,18 @@ export default class Index2 extends Component {
   
   // Create a way for child component to pass info to this component
   // Stepper for register fpage
+  componentWillMount() {
+    switch (window.location.pathname) {
+      case "/register":
+        this.setState({view: "register"});
+        break;
+      case "/forgot":
+        this.setState({view: "forgot"});
+        break;
+      default:
+        break;
+    }
+  }
 
   changeView(v) {
     this.setState({view: v})
@@ -26,8 +38,8 @@ export default class Index2 extends Component {
     switch (this.state.view) {
       case "login":
         return <LoginWindow data={{changeView: this.changeView.bind(this)}}/>
-      case "forget":
-        return <Forget data={{changeView: this.changeView.bind(this)}}/>
+      case "forgot":
+        return <Forgot data={{changeView: this.changeView.bind(this)}}/>
       case "register":
         return <Register data={{changeView: this.changeView.bind(this)}}/>
       default: 

@@ -3,11 +3,11 @@ picture
   id
   conversationId
   authorId
-  datetime
-  caption
-  imgUrl
+  dateTime
+  postId
+  imgURL
   likes
-  pet_id
+  petId 
 """
 
 from flask import Flask, request, Blueprint, jsonify

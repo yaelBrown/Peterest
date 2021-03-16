@@ -19,6 +19,8 @@ export default class Router extends Component {
     return (
       <Switch>
         <Route path="/" exact component={Home}/>
+        <Route path="/register" exact component={Index2}/>
+        <Route path="/forgot" exact component={Index2}/>
         <Route path="/dashboard" exact component={Dashboard}/>
 
         <Route path="/test" exact component={Test}/>

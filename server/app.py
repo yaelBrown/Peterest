@@ -1,12 +1,11 @@
 from flask import Flask, send_from_directory
 from flask_cors import CORS
 
-# from controllers.userController import userController
+from controllers.userController import userController
 # from controllers.petsController import petsController
 # from controllers.dashboardController import dashboardController
 # from controllers.guestController import guestController
 # from controllers.pictureController import pictureController
-from controllers.testController import testController
 
 app = Flask(
   __name__, 
@@ -21,7 +20,6 @@ CORS(app)
 # app.register_blueprint(dashboardController, url_prefix='/api/dashboard/')
 # app.register_blueprint(guestController, url_prefix='/api/guest/')
 # app.register_blueprint(pictureController, url_prefix='/api/pictures/')
-app.register_blueprint(testController)
 
 @app.route("/")
 def testApi():

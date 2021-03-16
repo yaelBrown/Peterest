@@ -1,7 +1,7 @@
 from flask import Flask, request, Blueprint, jsonify
 from flask_bcrypt import Bcrypt
 
-from config.dbController import con
+from .config.config_mongo import db
 
 import json
 import jwt
@@ -40,7 +40,7 @@ def register():
   newUser = {}
   newUser["username"] = data["username"]
   newUser["password"] = Bcrypt.generate_password_hash(None, data["password"], _rounds)
-  newUser["isAdmin"] = data["isAdmin"]
+  newUser["email"] = data["email"]
   newUser["name"] = data["name"]
 
   nU = u.register(newUser)

@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import LoginService from '../../Services/LoginService'
 
 import logoIcon from '../../Assets/img/logo-icon.svg'
-import loadingIcon from '../../Assets/img/LoadingIcon.gif'
 
 export default class LoginWindow extends Component {
   constructor(props) {
@@ -46,6 +45,8 @@ export default class LoginWindow extends Component {
   clearPasswordWithinForm = () => {
     this.state({password: ""})
   }
+
+  cookies = () => alert("Cookies")
 
   render() {
     let loadingIconStyleVisibility = ""
@@ -195,7 +196,7 @@ export default class LoginWindow extends Component {
                             </div>
                           <div className="col-6">
                             <div className="forgot-password">
-                              <a href="#" onClick={() => this.props.data.changeName("forget")}>Lost Password?</a>
+                              <a href="/forgot">Lost Password?</a>
                             </div>
                           </div>
                         </div>
@@ -207,13 +208,12 @@ export default class LoginWindow extends Component {
                   <input type="hidden" id="element-login-security" name="element-login-security" defaultValue="84440c24f6" />
                   <input type="hidden" name="_wp_http_referer" defaultValue="/beehive-preview/" />
                   <div className="register-link">
-                    <a href="/">
+                    <a href="/register">
                       <p className="color-primary">Create new Account</p>
                     </a>
                   </div>
                   </form>
                 </div>
-                <img src={loadingIcon} style={loadingIconStyle} alt=""/>
                 </div>
               </div>
               </div>
