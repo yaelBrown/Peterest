@@ -1,17 +1,31 @@
 from flask import Flask, request, Blueprint, jsonify
 from flask_bcrypt import Bcrypt
 
-from .config.config_mongo import db
-
 import json
 import jwt
+import calendar
+import time
 
-import services.userService as userService
-u = userService.userService()
+import services.UserService as userService
+import services.OptionsService as optionSerice
+import services.PetsService as petsService
+import services.PostsService as postsService
+import services.PhotoService as photoService
+import services.FollowersService as followerService
+import services.NotificationService as notificationService
+
+u = userService.UserService()
+o = optionSerice.OptionService()
+pet = petsService.PetsService()
+post = postsService.PostsService()
+photo = photoService.PhotoService()
+f = followerService.FollowerService()
+n = notificationService.NotificationService()
 
 userController = Blueprint('userController', __name__)
 
 _rounds = 12
+cache = {}
 
 @userController.route('/login', methods=['POST'])
 def login():
@@ -28,7 +42,7 @@ def login():
   return {"data": str(out)[2:len(out)-1]}, 200
 
 @userController.route('/register', methods=['POST'])
-def register():
+def registerUser():
   data = request.get_json()
   
   if data == None: 
@@ -42,13 +56,23 @@ def register():
   newUser["password"] = Bcrypt.generate_password_hash(None, data["password"], _rounds)
   newUser["email"] = data["email"]
   newUser["name"] = data["name"]
+  newUser["location"] = data["location"]
+  newUser["dateCreated"] = calendar.timegm(time.gmtime())
+  newUser["dateLastLogin"] = int()
+  newUser["optionsId"] = o.createOptions()
+  newUser["pets"] = pet.createPets()
+  newUser["notifications"] = n.createNotifications()
+  newUser["pictures"] = photo.createPhotos()
+  newUser["followers"] = f.createFollowers()
 
-  nU = u.register(newUser)
+  nU = u.registerUser(newUser)
 
   if nU == False:
     return {"msg": "Unable to create new user"}, 422
   else: 
-    return {"msg": f"New user {newUser['username']} added", "data": nU }, 200 
+    cache[nU.inserted_id] = newUser
+    del newUser["password"]
+    return newUser, 200 
 
 @userController.route('/edit', methods=["PUT"])
 def edit():

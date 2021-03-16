@@ -1,19 +1,26 @@
 import json
 
-from flask_bcrypt import Bcrypt
-from config.dbController import con
+from config.config_mongo import db
+class UserService: 
+  userDb = db.users
 
-# Bcrypt.check_password_hash(None, dbUser["pw"], p)
-class userService: 
-
-  def login(self):
+  def loginUser(self):
     pass
 
-  def register(self): 
+  def registerUser(self, newUser): 
+    try:
+      uid = userDb.insert_one(newUser)
+
+      if uid is None: 
+        raise Exception("Unable to create user")
+      else: 
+        return uid.inserted_id
+    except Exception as e: 
+      print(e)
+      return False
+
+  def editUser(self, u):
     pass
 
-  def edit(self, u):
-    pass
-
-  def delete(self, u):
+  def deleteUser(self, u):
     pass

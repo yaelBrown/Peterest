@@ -5,19 +5,17 @@ class OptionService:
   NEW_OPTIONS = {}
   options = db.options
 
-  def create(self):
+  def createOptions(self):
     temp = NEW_OPTIONS
 
     try: 
       newOptions = options.insert_one(temp)
-      return nO.inserted_id
-
+      return newOptions.inserted_id
     except Exception as e: 
       print(e)
       return False
 
-
-  def get(self, userId):
+  def getOptions(self, userId):
     try:
       return resultOptions = options.find_one({"_id": ObjectId(userId)})
     except Exception as e: 
