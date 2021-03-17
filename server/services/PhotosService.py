@@ -11,10 +11,10 @@ class PhotoService:
       print(e)
       return False
 
-  def createPhoto(self): 
+  def createPicture(self): 
     pass
 
-  def getPhoto(self): 
+  def getPicture(self): 
     pass
 
   def getPhotos(self): 
@@ -25,8 +25,11 @@ class PhotoService:
       print(e)
       return False
 
-  def editPhoto(self): 
+  def editPicture(self): 
     pass
 
-  def deletePhoto(self):
+  def deletePicture(self):
+    pass
+
+  def deletePhotos(self):
     pass

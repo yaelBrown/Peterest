@@ -30,16 +30,20 @@ cache = {}
 @userController.route('/login', methods=['POST'])
 def login():
   data = request.get_json()
-
-  username = data["username"]
+  # workon login
+  # take bcrypted pw from frontend and compare with decrypted backend password
+  # if valid, pass
+  email = data["email"]
   password = data["password"]
+  rememberMe = data["rememberMe"]
 
-  out = u.login(username, password)
+  out = u.loginUser(email, password, rememberMe)
 
-  if out != False: 
-    out = jwt.encode(out, 'secret', algorithm='HS256')
+  if out is False: 
+    return {"msg": "user not found"}, 200
+  else: 
+    return out, 200
 
-  return {"data": str(out)[2:len(out)-1]}, 200
 
 @userController.route('/register', methods=['POST'])
 def registerUser():
