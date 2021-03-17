@@ -1,7 +1,15 @@
+from config.config_mongo import db
+from bson import ObjectId
+
 class PhotoService: 
 
   def createPhotos(self):
-    pass
+    try:
+      newPhotos = db.photos.insert_one({"data": []})
+      return str(newPhotos.inserted_id)
+    except Exception as e:
+      print(e)
+      return False
 
   def createPhoto(self): 
     pass
@@ -10,7 +18,12 @@ class PhotoService:
     pass
 
   def getPhotos(self): 
-    pass
+    try:
+      resultPhotos = photos.find_one({"_id": ObjectId(userId)})
+      return resultPhotos
+    except Exception as e:
+      print(e)
+      return False
 
   def editPhoto(self): 
     pass

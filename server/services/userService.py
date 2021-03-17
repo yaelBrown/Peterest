@@ -2,14 +2,14 @@ import json
 
 from config.config_mongo import db
 class UserService: 
-  userDb = db.users
+  # userDb = db.users
 
   def loginUser(self):
     pass
 
   def registerUser(self, newUser): 
     try:
-      uid = userDb.insert_one(newUser)
+      uid = db.users.insert_one(newUser)
 
       if uid is None: 
         raise Exception("Unable to create user")

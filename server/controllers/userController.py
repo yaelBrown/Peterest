@@ -7,10 +7,10 @@ import calendar
 import time
 
 import services.UserService as userService
-import services.OptionsService as optionSerice
+import services.OptionService as optionSerice
 import services.PetsService as petsService
 import services.PostsService as postsService
-import services.PhotoService as photoService
+import services.PhotosService as photoService
 import services.FollowersService as followerService
 import services.NotificationService as notificationService
 
@@ -52,7 +52,6 @@ def registerUser():
     data["isAdmin"] = False
 
   newUser = {}
-  newUser["username"] = data["username"]
   newUser["password"] = Bcrypt.generate_password_hash(None, data["password"], _rounds)
   newUser["email"] = data["email"]
   newUser["name"] = data["name"]
@@ -62,17 +61,19 @@ def registerUser():
   newUser["optionsId"] = o.createOptions()
   newUser["pets"] = pet.createPets()
   newUser["notifications"] = n.createNotifications()
-  newUser["pictures"] = photo.createPhotos()
+  newUser["photos"] = photo.createPhotos()
   newUser["followers"] = f.createFollowers()
+  newUser["posts"] = post.createPosts()
 
   nU = u.registerUser(newUser)
 
   if nU == False:
     return {"msg": "Unable to create new user"}, 422
   else: 
-    cache[nU.inserted_id] = newUser
+    cache[nU] = newUser
     del newUser["password"]
-    return newUser, 200 
+    newUser["_id"] = str(newUser["_id"])
+    return {"msg": "successfully registered user", "data": newUser}, 200 
 
 @userController.route('/edit', methods=["PUT"])
 def edit():
