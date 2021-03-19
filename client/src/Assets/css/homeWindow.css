@@ -1,0 +1,33 @@
+.homeWindow-window {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem auto auto auto;
+  max-width: 600px;
+  max-height: 800px;
+  z-index: 1;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+
+.loginForm h2 {
+  text-align: center;
+}
+
+table {
+  width: 400px;
+}
+
+td {
+  text-align: center;
+  padding: .3rem;
+}
+
+.loginForm h3 {
+  text-align: center;
+}
+
+.loginButtonRow {
+  margin: auto;
+  text-align: center;
+  width: 100%;
+}

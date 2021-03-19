@@ -1,0 +1,8 @@
+video {
+  position: absolute;
+  width: 100vw;
+  max-height: 1420px;
+  z-index: -1;
+  left: 0;
+  top: 0;
+}

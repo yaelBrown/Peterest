@@ -1,8 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './Assets/css/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+// import { createStore, combineReducers } from 'redux';
+
+// combineReducers({})
+// let store = createStore(combineReducers);
+// store.subscribe();
+
+// Store -> Globalized STate
+
+// Action
+
+// Reducer
+
+// Dispatch
 
 ReactDOM.render(
   <React.StrictMode>

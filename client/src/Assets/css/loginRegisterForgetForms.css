@@ -1,0 +1,5 @@
+.loginForm, .registerForm, .forgetForm {
+  display: inline-flex;
+  flex-direction: column;
+  margin: auto;
+}

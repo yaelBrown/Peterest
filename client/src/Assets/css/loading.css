@@ -1,0 +1,12 @@
+.loaderWrapper {
+  width: "100%";
+  height: "100vh";
+  display: "flex";
+  opacity: "60%";
+  margin: auto;
+  background-color: green;
+}
+
+.loader-img {
+  margin: auto;
+}

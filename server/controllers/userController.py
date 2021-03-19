@@ -30,9 +30,6 @@ cache = {}
 @userController.route('/login', methods=['POST'])
 def login():
   data = request.get_json()
-  # workon login
-  # take bcrypted pw from frontend and compare with decrypted backend password
-  # if valid, pass
   email = data["email"]
   password = data["password"]
   rememberMe = data["rememberMe"]
