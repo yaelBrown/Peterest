@@ -2,12 +2,10 @@ import axios from 'axios'
 import API_URL from '../Api/api.js'
 import jwt_decode from "jwt-decode";
 
-// Login method
 // Check if user is logged in
 
+const prefix = "users/"
 class LoginService {
-  // constructor(props) {}
-
   isLoggedIn = () => {
     let token = localStorage.getItem("token")
     if (token) {
@@ -20,25 +18,37 @@ class LoginService {
       return false
     }
   }
-
-  login = (user, pass, remember) => {
-    axios.post(API_URL, {
-      username: user,
-      password: pass,
-      rememberMe: remember
-    }).then((res) => {
-      if (res) {
+  
+  login = async (email, password, rememberMe) => {
+    let config = {
+      method: 'post',
+      url: API_URL + prefix + "login",
+      headers: { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      data: JSON.stringify({
+        email,
+        password,
+        rememberMe
+      })
+    };
+    await axios(config)
+    .then((response) => {
+      if (response) {
         // Use reducer to add res.data to redux
-        console.log(res)
-        return localStorage.setItem("token", res.token)
+        localStorage.setItem("token", response.data.token)
+        console.log(response)
+        return response
       } else {
         console.error("unable to login")
         return false
       }
-    }).catch((err) => {
-      console.error(err)
-      return false
     })
+    .catch(function (error) {
+      console.error(error)
+      return false
+    });
   }
 
   logout = () => {

@@ -17,25 +17,28 @@ export default class LoginWindow extends Component {
   }
   
   clearPasswordWithinForm = () => {
-    this.state({password: ""})
+    this.setState({password: ""})
   }
 
   handleChange = (property, val) => {
     val = val.trim()
-    this.state({[property]: val})
+    this.setState({[property]: val})
   }
 
   handleLogin = () => {
-    if (!this.state.username || !this.state.password) return
-    
-    this.setState({loading: true})
-    let jwtToken = false
-    
-    jwtToken = LoginService.login(this.state.username, this.state.password, this.state.rememberMe)
-    
-    if (jwtToken) {
-      localStorage.setItem("token", jwtToken)
-      this.props.history.push("/dashboard")
+  }
+  
+  handleLogin = () => {
+    if (!this.state.email || !this.state.password) return
+    let rememberMe = this.state.rememberMe
+    if (this.state.rememberMe === "on") {
+      rememberMe = true
+    }
+    console.log({email: this.state.email, password: this.state.password, rememberMe})
+    let loginResponse = LoginService.login(this.state.email, this.state.password, rememberMe)
+    console.log(loginResponse)
+    if (typeof(loginResponse)  === "object") {
+      window.location.href = "/dashboard"
     } else { 
       this.clearPasswordWithinForm()
       console.error("Invalid Login")
@@ -47,22 +50,36 @@ export default class LoginWindow extends Component {
       <div className="loginForm">
         <h2>Login</h2>
         <table>
-          <tr>
-            <td><h3>Email</h3></td>
-            <td><input type="text" placeholder="email@address.com"></input></td>
-          </tr>
-          <tr>
-            <td><h3>Password</h3></td>
-            <td><input type="password" placeholder="password"></input></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox"></input> <small>Remember me?</small></td>
-            <td><a onClick={() => alert("forgot link was clicked")} style={{cursor: "pointer"}}><small>Forgot Password</small></a></td>
-          </tr>
+          <tbody>
+            <tr>
+              <td><h3>Email</h3></td>
+              <td><input 
+                type="text" 
+                placeholder="email@address.com" 
+                onChange={(e) => this.handleChange("email", e.target.value)}
+                value={this.state.email}></input></td>
+            </tr>
+            <tr>
+              <td><h3>Password</h3></td>
+              <td><input 
+                type="password" 
+                placeholder="password" 
+                onChange={(e) => this.handleChange("password", e.target.value)}
+                value={this.state.password}></input></td>
+            </tr>
+            <tr>
+              <td><input 
+                type="checkbox" 
+                onChange={(e) => this.handleChange("rememberMe", e.target.value)}
+                value={this.state.rememberMe}></input> <small>Remember me?</small></td>
+              <td><small onClick={() => this.props.data.changeDisplay("forgot")} style={{cursor: "pointer"}}>Forgot Password</small></td>
+            </tr>
+          </tbody>
         </table>
         <div className="loginButtonRow">
-          <button onClick={() => alert("login was clicked")}>Login</button><br/>
-          <button onClick={() => alert("register was clicked")}>Register</button>
+          <button onClick={() => this.handleLogin()}>Login</button><br/>
+          {/* <button onClick={() => console.log(this.state)}>Login</button><br/> */}
+          <button onClick={() => this.props.data.changeDisplay("register")}>Register</button>
         </div>
       </div>
     )

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from "react-router-dom";
 
 import Home from "./Views/Home.js";
-// import Dashboard from  "./Views/Dashboard.js";
+import Dashboard from  "./Views/Dashboard.js";
 
 // import Test from "./Views/Test.js";
 // import Index2 from "./Views/Index2.js";
@@ -21,12 +21,11 @@ export default class Router extends Component {
         <Route path="/" exact component={Home}/>
         {/* <Route path="/register" exact component={Index2}/>
         <Route path="/forgot" exact component={Index2}/>
-        <Route path="/dashboard" exact component={Dashboard}/>
-
+        
         <Route path="/test" exact component={Test}/>
         <Route path="/index2" exact component={Index2}/>
         <Route path="/loading" exact component={Loading}/>
-
+        
         <Route path="/about" exact component={About}/>
         <Route path="/blog" exact component={Blog}/>
         <Route path="/contact" exact component={Contact}/>
@@ -35,8 +34,9 @@ export default class Router extends Component {
         <Route path="/jobs" exact component={Dashboard}/>
         <Route path="/adopt" exact component={Dashboard}/>
         <Route path="/profile" exact component={Dashboard}/>
-
+        
         <Route path="/u/:handle" exact component={Dashboard}/> */}
+        <Route path="/dashboard" exact component={Dashboard}/>
         <Route path="/loading" component={Loading}/>
         <Route component={Error}/>
       </Switch>
