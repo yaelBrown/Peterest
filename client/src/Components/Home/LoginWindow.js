@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import LoginService from '../../Services/LoginService.js'
 
 import '../../Assets/css/loginRegisterForgetForms.css'
 
+import * as actionTypes from '../../Redux/Actions/homeActions.js'
 
 export default class LoginWindow extends Component {
   constructor(props) {
@@ -83,5 +85,17 @@ export default class LoginWindow extends Component {
         </div>
       </div>
     )
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    type: actionTypes.USER_TO_STORE, 
   }
 }

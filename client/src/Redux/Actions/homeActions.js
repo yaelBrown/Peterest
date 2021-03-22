@@ -1,5 +1,2 @@
-export const userToStore = () => {
-  return {
-    type: "USER_TO_STORE"
-  }
-}
+export const USER_TO_STORE = "USER_TO_STORE"
+export const USER_FROM_STORE = "USER_FROM_STORE"
