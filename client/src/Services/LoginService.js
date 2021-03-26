@@ -33,22 +33,24 @@ class LoginService {
         rememberMe
       })
     };
-    await axios(config)
-    .then((response) => {
-      if (response) {
-        // Use reducer to add res.data to redux
-        localStorage.setItem("token", response.data.token)
-        console.log(response)
-        return response
-      } else {
-        console.error("unable to login")
+
+    return await axios(config)
+      .then(res => res.data)
+      .then((res) => {
+        if (res) {
+          console.log(res)
+          localStorage.setItem("token", res.token)
+          console.log(res.user)
+          return res.user
+        } else {
+          console.error("unable to login")
+          return false
+        }
+      })
+      .catch(function (error) {
+        console.error(error)
         return false
-      }
-    })
-    .catch(function (error) {
-      console.error(error)
-      return false
-    });
+      });
   }
 
   logout = () => {

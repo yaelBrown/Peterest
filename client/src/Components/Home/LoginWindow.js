@@ -5,9 +5,10 @@ import LoginService from '../../Services/LoginService.js'
 
 import '../../Assets/css/loginRegisterForgetForms.css'
 
-import * as actionTypes from '../../Redux/Actions/homeActions.js'
+import * as actionTypes from '../../Redux/Home/homeActions.js'
+import { addUserToStore } from '../../Redux/Home/homeActions.js'
 
-export default class LoginWindow extends Component {
+class LoginWindow extends Component {
   constructor(props) {
     super(props)
   
@@ -18,6 +19,8 @@ export default class LoginWindow extends Component {
     }
   }
   
+
+
   clearPasswordWithinForm = () => {
     this.setState({password: ""})
   }
@@ -33,18 +36,22 @@ export default class LoginWindow extends Component {
   handleLogin = () => {
     if (!this.state.email || !this.state.password) return
     let rememberMe = this.state.rememberMe
+    
     if (this.state.rememberMe === "on") {
       rememberMe = true
     }
-    console.log({email: this.state.email, password: this.state.password, rememberMe})
-    let loginResponse = LoginService.login(this.state.email, this.state.password, rememberMe)
-    console.log(loginResponse)
-    if (typeof(loginResponse)  === "object") {
-      window.location.href = "/dashboard"
-    } else { 
-      this.clearPasswordWithinForm()
-      console.error("Invalid Login")
-    }
+    // console.log({email: this.state.email, password: this.state.password, rememberMe})
+    LoginService.login(this.state.email, this.state.password, rememberMe)
+      .then(data => {
+        console.log(data)
+        if (typeof(data)  === "object") {
+          this.props.userToStore(data)
+          window.location.href = "/dashboard"
+        } else { 
+          this.clearPasswordWithinForm()
+          console.error("Invalid Login")
+        }
+      })
   }
 
   render() {
@@ -80,7 +87,6 @@ export default class LoginWindow extends Component {
         </table>
         <div className="loginButtonRow">
           <button onClick={() => this.handleLogin()}>Login</button><br/>
-          {/* <button onClick={() => console.log(this.state)}>Login</button><br/> */}
           <button onClick={() => this.props.data.changeDisplay("register")}>Register</button>
         </div>
       </div>
@@ -90,12 +96,14 @@ export default class LoginWindow extends Component {
 
 const mapStateToProps = state => {
   return {
-
+    user: state.user
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    type: actionTypes.USER_TO_STORE, 
+    userToStore: (userData) => dispatch(addUserToStore(userData)) // need to add payload to this method
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginWindow)

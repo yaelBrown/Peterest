@@ -1,5 +1,5 @@
-import { userToStore } from '../Actions/homeActions.js'
-import * as actionTypes from '../Actions/homeActions.js'
+import { userToStore } from './homeTypes.js'
+import * as actionTypes from './homeTypes.js'
 
 const initialState = {
   user: {},
@@ -14,12 +14,7 @@ const HomeReducer = ( state = initialState, action) => {
     case actionTypes.USER_TO_STORE: 
       return {
         ...state,
-        user: action.user
-      }
-    case actionTypes.USER_FROM_STORE:
-      return {
-        ...state,
-        user: {}
+        user: action.payload
       }
     default: return state
   }

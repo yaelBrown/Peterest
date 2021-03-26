@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 
-import homeReducer from './Reducers/homeReducer.js'
-import dashboardReducer from './Reducers/dashboardReducer.js'
+import homeReducer from './Home/homeReducer.js'
+import dashboardReducer from './Dashboard/dashboardReducer.js'
 
 const rootReducer = combineReducers({
   home: homeReducer,
