@@ -14,13 +14,33 @@ import Business from '../Components/Business/Business.js'
 import Friends from '../Components/Friends/Friends.js'
 import Jobs from '../Components/Jobs/Jobs.js'
 import Market from '../Components/Market/Market.js'
+import Notification from '../Components/Notifications/Notifications.js'
+import Messenger from '../Components/Messenger/Messenger.js'
+import Blog from '../Components/Blog/Blog.js'
+
+import '../Assets/css/dashboard.css'
 export default class Dashboard extends Component {
   constructor(props) {
     super(props)
   
     this.state = {
       loading: true,
-      display: "feed"
+      display: "feed",
+      isLoggedIn: true,
+      dashboardData: {
+        followersNumbers: {
+          following: 0,
+          followers: 0
+        },
+        notifications: {
+          notificationData: [],
+          isNewNotifications: false
+        },
+        friends: [],
+        masterFeed: [],
+        isNewMessages: false,
+        isItemsInCart: false
+      }
     }
   }
   
@@ -36,7 +56,7 @@ export default class Dashboard extends Component {
         return <Profile data={{changeDisplay: this.changeDisplay.bind(this)}}/>
       case "profileEdit":
         return <ProfileEdit data={{changeDisplay: this.changeDisplay.bind(this)}}/>
-      case "profileSettings":
+      case "settings":
         return <ProfileSettings data={{changeDisplay: this.changeDisplay.bind(this)}}/>
       case "adopt":
         return <Adopt data={{changeDisplay: this.changeDisplay.bind(this)}}/>
@@ -44,12 +64,20 @@ export default class Dashboard extends Component {
         return <Albums data={{changeDisplay: this.changeDisplay.bind(this)}}/>
       case "business":
         return <Business data={{changeDisplay: this.changeDisplay.bind(this)}}/>
-      case "Friends":
+      case "friends":
         return <Friends data={{changeDisplay: this.changeDisplay.bind(this)}}/>
-      case "Jobs":
+      case "jobs":
         return <Jobs data={{changeDisplay: this.changeDisplay.bind(this)}}/>
-      case "Market":
+      case "market":
         return <Market data={{changeDisplay: this.changeDisplay.bind(this)}}/>
+      case "notifications":
+        return <Notification data={{changeDisplay: this.changeDisplay.bind(this)}}/>
+      case "messenger":
+        return <Messenger data={{changeDisplay: this.changeDisplay.bind(this)}}/>
+      case "cart":
+        return <Market data={{changeDisplay: this.changeDisplay.bind(this)}}/>
+      case "blog":
+        return <Blog data={{changeDisplay: this.changeDisplay.bind(this)}}/>
       default: 
         return <Feed data={{changeDisplay: this.changeDisplay.bind(this)}}/>
     }
@@ -70,11 +98,20 @@ export default class Dashboard extends Component {
     } else {
       return (
         <div>
-          <h1>Dashboard</h1>
-          {/* <SearchBar data={{changeDisplay: this.changeDisplay.bind(this)}}/> */}
-          <SidebarLeft data={{changeDisplay: this.changeDisplay.bind(this)}}/>
-          {/* <SidebarRight data={{changeDisplay: this.changeDisplay.bind(this)}}/> */}
-          {this.displayContent()}
+          <SearchBar 
+            data={{changeDisplay: this.changeDisplay.bind(this)}}
+            newNotifications={this.state.dashboardData.notifications.isNewNotifications}
+            newMessages={this.state.dashboardData.newMessages}
+            itemsInCart={this.state.dashboardData.isItemsInCart}
+            />
+          <SidebarLeft
+            data={{changeDisplay: this.changeDisplay.bind(this)}}
+            userLoggedIn={this.state.isLoggedIn}
+            />
+          <SidebarRight data={{changeDisplay: this.changeDisplay.bind(this)}}/>
+          <div id="dashboardMainContent">
+            { this.displayContent() }
+          </div>
         </div>
       )
     }

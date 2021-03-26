@@ -1,0 +1,29 @@
+#sidebarLeft {
+  background-color: #ffffff;
+  position: fixed;
+  height: 100vh;
+  width: 200px;
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#sidebarLeftTop {
+  height: 150px;
+}
+
+#sidebarLeftProfilePictureIcon {
+  cursor: pointer;
+}
+
+#sidebarLeftBottomTable {
+  width: 100px;
+  text-align: center;
+  margin: auto;
+}
+
+.sidebarItemName {
+  cursor: pointer;
+}

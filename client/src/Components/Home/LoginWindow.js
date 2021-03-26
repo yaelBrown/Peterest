@@ -18,8 +18,6 @@ class LoginWindow extends Component {
        rememberMe: false,
     }
   }
-  
-
 
   clearPasswordWithinForm = () => {
     this.setState({password: ""})

@@ -1,0 +1,41 @@
+#searchBar {
+  height: 50px;
+  position: absolute;
+  top: 0;
+  padding-bottom: 13px;
+  background-color: #ffffff;
+  z-index: 10;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+}
+
+#searchLeft {
+  width: 240px;
+  text-align: center;
+  cursor: pointer;
+}
+
+#searchbarLogo {
+  cursor: pointer;
+}
+
+#searchMiddle {
+  width: 100%;
+  text-align: center;
+}
+
+#searchRight {
+  width: 400px;
+  text-align: center;
+  margin: auto;
+  padding-top: 1rem;
+}
+
+.searchbarRightIcons {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 2rem;
+  cursor: pointer;
+}
