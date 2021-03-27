@@ -6,3 +6,11 @@ body {
   padding-left: 200px;
   padding-top: 50px;
 }
+
+.dashboardContentPanels {
+  margin-left: 2rem;
+  margin-top: 2.2rem;
+  width: calc(100% - 24rem);
+  padding: .5rem;
+  background-color: #ffffff;
+}

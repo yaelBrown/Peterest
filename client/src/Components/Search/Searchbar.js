@@ -18,7 +18,7 @@ export default class Searchbar extends Component {
         { name: "cart", icon: cartIcon },
         { name: "messenger", icon: messageOutlined },
         { name: "notifications", icon: notificationIcon },
-        { name: "profile", icon: profileIcon }
+        { name: "settings", icon: profileIcon }
       ],
       newNotifications: this.props.newNotifications,
       newMessages: this.props.newMessages,

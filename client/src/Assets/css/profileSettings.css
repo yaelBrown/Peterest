@@ -1,0 +1,43 @@
+#ps {
+
+}
+
+#psProfileImage {
+  height: 7rem;
+  width: 7rem;
+  border-radius: 50%;
+  border: #D6D9DC 2px solid;
+}
+
+table {
+  width: 100%;
+}
+
+table td {
+  vertical-align: top;
+}
+
+table td:nth-child(1) {
+  width: 8rem;
+}
+
+table td:nth-child(2) {
+  text-align: left;
+}
+
+table td:nth-child(3) {
+  width: 8rem;
+}
+
+.psRow {
+  display: flex;
+  width: 100%;
+}
+
+.psLabels {
+  min-width: 30%;
+}
+
+.ipInputs {
+  width: 100%;
+}

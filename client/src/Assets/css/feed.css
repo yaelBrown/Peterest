@@ -1,0 +1,9 @@
+#feedLoader {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#feedCat {
+  margin: auto;
+}
