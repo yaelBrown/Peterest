@@ -2,8 +2,23 @@
   display: flex;
   justify-content: center;
   text-align: center;
+  min-width: fit-content;
 }
 
 #feedCat {
+  margin: auto;
+}
+
+.feedDivs {
+  margin: .15rem;
+}
+
+.feedDivLeft {
+  min-width: 15%;
+  text-align: center;
+}
+
+.feedDivRight {
+  min-width: 80%;
   margin: auto;
 }

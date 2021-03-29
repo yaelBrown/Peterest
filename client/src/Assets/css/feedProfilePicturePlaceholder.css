@@ -1,0 +1,7 @@
+#fpppImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: #D6D9DC 2px solid;
+  cursor: pointer;
+}
