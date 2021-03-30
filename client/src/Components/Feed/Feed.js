@@ -4,6 +4,7 @@ import FeedCreatePost from '../Feed/FeedCreatePost.js'
 import FeedPost from '../Feed/FeedPost.js'
 
 import '../../Assets/css/feed.css'
+
 export default class Feed extends Component {
   constructor(props) {
     super(props)
