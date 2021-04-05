@@ -1,0 +1,8 @@
+--users=##
+  Defines number of users for app
+
+--pets=##
+  Defines number of pets for app
+
+--sim
+  Takes current users and makes them post pictures of cats and dogs

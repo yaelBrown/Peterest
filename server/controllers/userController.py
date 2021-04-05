@@ -49,14 +49,13 @@ def registerUser():
   if data == None: 
     return {"msg": "Empty Request"}, 422
 
-  if "isAdmin" not in data.keys():
-    data["isAdmin"] = False
-
   newUser = {}
   newUser["password"] = Bcrypt.generate_password_hash(None, data["password"], _rounds)
   newUser["email"] = data["email"]
   newUser["name"] = data["name"]
   newUser["location"] = data["location"]
+  newUser["gender"] = data["gender"]
+  newUser["coverPic"] = ""
   newUser["dateCreated"] = calendar.timegm(time.gmtime())
   newUser["dateLastLogin"] = int()
   newUser["optionsId"] = o.createOptions()
@@ -65,6 +64,9 @@ def registerUser():
   newUser["photos"] = photo.createPhotos()
   newUser["followers"] = f.createFollowers()
   newUser["posts"] = post.createPosts()
+
+  if data["profilePic"] == None: 
+    newUser["profilePic"] = ""
 
   nU = u.registerUser(newUser)
 
