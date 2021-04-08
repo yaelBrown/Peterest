@@ -1,3 +1,7 @@
 used to show what api config is enabled. 
 
 cloud or local
+
+
+
+git config --global http.postBuffer 524288000

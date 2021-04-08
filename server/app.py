@@ -2,6 +2,7 @@ from flask import Flask, send_from_directory
 from flask_cors import CORS
 
 from controllers.UserController import userController
+from controllers.PostsController import postsController
 
 app = Flask(
   __name__, 
@@ -12,6 +13,7 @@ app = Flask(
 CORS(app)
 
 app.register_blueprint(userController, url_prefix='/api/users/')
+app.register_blueprint(postsController, url_prefix='/api/posts/')
 
 @app.route("/")
 def testApi():

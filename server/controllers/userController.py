@@ -56,14 +56,10 @@ def registerUser():
   newUser["location"] = data["location"]
   newUser["gender"] = data["gender"]
   newUser["coverPic"] = ""
+  newUser["profilePic"] = ""
   newUser["dateCreated"] = calendar.timegm(time.gmtime())
   newUser["dateLastLogin"] = int()
-  newUser["optionsId"] = o.createOptions()
-  newUser["pets"] = pet.createPets()
-  newUser["notifications"] = n.createNotifications()
-  newUser["photos"] = photo.createPhotos()
-  newUser["followers"] = f.createFollowers()
-  newUser["posts"] = post.createPosts()
+  newUser["optionsId"] = dict()
 
   if data["profilePic"] == None: 
     newUser["profilePic"] = ""
@@ -92,10 +88,10 @@ def edit():
 @userController.route('/delete', methods=["DELETE"])
 def delete():
   data = request.get_json()
-
-  dU = u.delete(data)
-
-  if dU == False: 
-    return {"msg": f"Unable to delete {data['id']}"}, 422 
+  
+  dU = u.deleteUser(data["uId"])
+  dO = o.deleteOptions(data["uId"])
+  if dU == False or dO == False: 
+    return {"msg": f"Unable to delete {data['uId']}"}, 422 
   else:
-    return {"msg": f"deleted user: {data['id']}"}, 200
+    return {"msg": f"deleted user: {data['uId']}"}, 200

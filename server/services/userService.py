@@ -5,6 +5,7 @@ import datetime
 import calendar
 import time
 
+from bson.objectid import ObjectId
 from config.config_mongo import db
 
 class UserService: 
@@ -37,7 +38,6 @@ class UserService:
       print(e)
       return False
 
-
   def registerUser(self, newUser): 
     try:
       uid = db.users.insert_one(newUser)
@@ -53,7 +53,11 @@ class UserService:
     pass
 
   def deleteUser(self, u):
-    pass
+    try: 
+      deletedUser = db["users"].delete_one({"_id": ObjectId(u)})
+      print(deletedUser)
 
-
-  
+      return True
+    except Exception as e: 
+      print(e)
+      return False

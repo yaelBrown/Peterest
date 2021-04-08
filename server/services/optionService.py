@@ -18,3 +18,13 @@ class OptionService:
     except Exception as e: 
       print(e)
       return False
+
+  def deleteOptions(self, userId):
+    try:
+      deletedOptions = db["options"].delete_one({"_id": ObjectId(userId)})
+      print(deletedOptions)
+
+      return True
+    except Exception as e: 
+      print(e)
+      return False
