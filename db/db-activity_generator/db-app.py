@@ -3,6 +3,9 @@ import requests
 import datetime
 import time
 import json
+import os
+import random
+import math
 from pymongo import MongoClient
 
 # 1. vars 
@@ -15,6 +18,10 @@ TASKS = []
 NUM_USERS = 0
 NUM_PETS = 0
 
+# mongo connection
+client = MongoClient(MONGO_URI)
+db = client.get_database('Peterest_db')
+
 # 2. caches
 userCache = []
 
@@ -23,7 +30,7 @@ def getOneHuman():
   return requests.get(USER_API).json()['results'][0]
 
 def getOneDog(): 
-  return requests.get(DOG_API + '/images/search').json()[0]
+  return requests.get(DOG_API + '/images/search').json()[0]["url"]
 
 def getOneCat():
   return requests.get(CAT_API + '/images/search').json()[0]
@@ -73,6 +80,33 @@ def addRequestedHumans(numU):
 
   l("Finished creating users", True)
 
+def createPost(uId, postType):
+  """
+  {
+    "authorId": "606e46be95860b96236a30c8",
+    "caption": "1st post",
+    "contentSrc": "",
+    "postType": "text",
+    "petsTagged": []
+  }
+  """
+  newPost = {
+    "authorId": str(uId),
+    "caption": getCaption(),
+    "postType": "photo" if postType is "photo" else "text",
+    "petsTagged": [] 
+  }
+  newPost["contentSrc"] = getOneDog() if newPost["postType"] != "text" else ""
+
+  res = requests.post(API_URI + "/posts/post", json=newPost)
+  if res.status_code == 200:
+    msg = "Successfully created " + postType + " post with caption = " + newPost["caption"]
+    l(msg)
+  else: 
+    l(str(res.status_code))
+    msg = "Error Creating Post"
+    l(msg)
+
 def addRequestedPets(numP):
   l("Adding " + numP + " pets!")
 
@@ -80,6 +114,19 @@ def addRequestedPets(numP):
 # 4. cache methods
 def userToCache(user):
   return userCache.append(user)
+
+def populateCache():
+  l("Populating cache....", True)
+  l(str(len(userCache)) + " users currently")
+
+  all_users = db.users.find()
+  for u in all_users:
+    userCache.append(u)
+
+  msg = str(len(userCache)) + " users currently"
+  l(msg)
+  l("", True)
+  return len(userCache)
 
 
 # 5. db methods 
@@ -115,6 +162,16 @@ def sim():
   cnt = 1
   while True: 
     l("Post by user # " + str(cnt))
+
+    randy = math.floor(random.random() * 10) % 2 == 0
+    randyUser = random.choice(userCache)["_id"]
+    postType = ""
+    if randy == True: 
+      postType = "text"
+    else: 
+      postType = "photo"
+    createPost(randyUser, postType)
+    
     cnt += 1
     time.sleep(3)
 
@@ -147,8 +204,14 @@ def argParser():
 
 
 # 8. main
+def figlet():
+  os.system("figlet -c Peterest Data Generator")
+
 def main():
+  figlet() # comment this out if you are on windows/dont have figlet installed
   l("Peterest Data Generator", True)
+  l("Populating user cache")
+  populateCache()
   l("Determining arguments")
   argParser()
 
