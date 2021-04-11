@@ -1,0 +1,11 @@
+db tables = {
+	comments
+	followers
+	notifications
+	options
+	pets
+	photos
+	pictures
+	posts
+	users
+}

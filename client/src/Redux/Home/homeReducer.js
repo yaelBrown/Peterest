@@ -1,4 +1,3 @@
-import { userToStore } from './homeTypes.js'
 import * as actionTypes from './homeTypes.js'
 
 const initialState = {

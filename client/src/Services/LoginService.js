@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 
 // Check if user is logged in
 
-const prefix = "users/"
+const PREFIX = "users/"
 class LoginService {
   isLoggedIn = () => {
     let token = localStorage.getItem("token")
@@ -22,7 +22,7 @@ class LoginService {
   login = async (email, password, rememberMe) => {
     let config = {
       method: 'post',
-      url: API_URL + prefix + "login",
+      url: API_URL + PREFIX + "login",
       headers: { 
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
@@ -47,7 +47,7 @@ class LoginService {
           return false
         }
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.error(error)
         return false
       });

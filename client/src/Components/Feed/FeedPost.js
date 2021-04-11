@@ -17,13 +17,13 @@ export default class FeedPost extends Component {
     console.log(this.props)
     
     const displayContent = () => {
-      switch(this.props.data.type) {
+      switch(this.props.data.postType) {
         case "text":
-          return <span className="feedPostContentText">{this.props.data.comment}</span>
+          return <span className="feedPostContentText">{this.props.data.caption}</span>
         case "photo":
           return (
             <span className="feedPostContentPhoto">
-              <img src={ExamplePhoto1} className="feedPostContentPictureElement" alt="feed picture"/>
+              <img src={this.props.data.contentSrc} className="feedPostContentPictureElement" alt="feed picture"/>
             </span>)
         case "video":
           return <span className="feedPostContentText">Videos coming soon</span>

@@ -1,6 +1,7 @@
 import json
-from bson import json_util, ObjectId
 
+from pymongo import DESCENDING
+from bson import json_util, ObjectId
 from config.config_mongo import db
 
 class PostsService: 
@@ -30,7 +31,7 @@ class PostsService:
 
   def getPosts(self):
     try: 
-      resultPosts = db.posts.find()
+      resultPosts = db.posts.find().sort("dateTime", DESCENDING)
       return resultPosts
     except Exception as e:
       print(e)
@@ -44,3 +45,4 @@ class PostsService:
 
   def serialize(self, results):
     return [json.dumps(p, default=json_util.default) for p in results]
+

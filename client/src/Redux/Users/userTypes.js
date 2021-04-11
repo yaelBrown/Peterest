@@ -1,0 +1,3 @@
+export const USERS_FROM_CACHE = "USERS_FROM_CACHE"
+export const USER_TO_CACHE = "USER_TO_CACHE"
+export const USERS_TO_CACHE = "USERS_TO_CACHE"

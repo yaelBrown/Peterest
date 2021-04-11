@@ -1,26 +1,77 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import LoadingCat from '../../Assets/img/LoadingCat.gif'
 import FeedCreatePost from '../Feed/FeedCreatePost.js'
 import FeedPost from '../Feed/FeedPost.js'
 
-import '../../Assets/css/feed.css'
+import FeedService from '../../Services/FeedService.js'
+import UserService from '../../Services/UserService.js'
 
-export default class Feed extends Component {
+import '../../Assets/css/feed.css'
+import { addUsersToCache, addUserToCache, getUsersFromCache } from '../../Redux/Users/userActions'
+
+class Feed extends Component {
   constructor(props) {
     super(props)
   
     this.state = {
       loading: false,
       adFrequency: 8,
-      masterFeed: []
+      masterFeed: [],
+      userCache: {}
     }
   }
   
+  async componentDidMount() {
+    let res = await FeedService.getFeed()
+      .then(data => {
+        console.log(data.data)
+        if (data.data) {
+          let tempUserCache = this.props.getUsersFromCache()
+          let unknownUsers = []
+          data.data.map((e) => {
+            if (!(e._id in tempUserCache)) {
+              // convert this to a set
+              unknownUsers.push(e)
+            }
+          })
+          if (unknownUsers.length > 0) {
+            let res_users = this.getUsersFromCacheHelper(unknownUsers)
+            if (!(res_users === undefined)) {
+              if (unknownUsers.length === 1) {
+                this.props.addUserToCache(res_users[0])
+              } else if (unknownUsers.length > 1) {
+                this.props.addUsersToCache(res_users)
+              }
+
+            }
+          }
+          let newState = {
+            masterFeed: data.data,
+            userCache: this.props.getUsersFromCache()
+          }
+          this.setState(newState)
+        }
+      })
+  }
+
+  async getUsersFromCacheHelper(users) {
+    console.log(users)
+    return await UserService.getUsers(users)
+  }
+
   generateFeed() {
+    if (this.state.masterFeed === undefined) {
+      console.log("state is undefined")
+      return
+    }
     let visibleFeed = []
+    if (this.state.masterFeed.length === 0 || this.state.masterFeed.length === undefined) {
+      return visibleFeed;
+    }
     this.state.masterFeed.map((e, i) => {
       if (i % this.state.adFrequency == 0) visibleFeed.push(<FeedPost type="ad" data={e} />)
-      switch (e.type) {
+      switch (e.postType) {
         case "text":
           visibleFeed.push(<FeedPost type="text" data={e} />)
           break;
@@ -85,15 +136,31 @@ export default class Feed extends Component {
         return (
           <div className="dashboardContentPanels">
             <FeedCreatePost/>
-            { this.generateFeed() }
             <hr/>
-            <FeedPost data={this.examplePostText()}/>
+            { this.generateFeed() }
+            {/* <FeedPost data={this.examplePostText()}/>
             <FeedPost data={this.examplePostPhoto()}/>
             <FeedPost data={this.examplePostPhoto()}/>
-            <FeedPost data={this.examplePostVideo()}/>
+            <FeedPost data={this.examplePostVideo()}/> */}
           </div>
         )
       }
     }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    userCache: state.userCache
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getUsersFromCache: () => dispatch(getUsersFromCache()),
+    addUserToCache: (userData) => dispatch(addUserToCache()),
+    addUsersToCache: (usersData) => dispatch(addUsersToCache())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feed)

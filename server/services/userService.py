@@ -5,7 +5,7 @@ import datetime
 import calendar
 import time
 
-from bson.objectid import ObjectId
+from bson import json_util, ObjectId
 from config.config_mongo import db
 
 class UserService: 
@@ -61,3 +61,31 @@ class UserService:
     except Exception as e: 
       print(e)
       return False
+
+  def getUsers(self, u):
+    try:
+      queryParams = {
+          "password": 0, 
+          "email": 0, 
+          "gender": 0, 
+          "coverPic": 0, 
+          "dateLastLogin": 0, 
+          "optionsId": 0, 
+          "dateCreated": 0
+        } 
+      if len(u) > 1: 
+        qUsers = [ObjectId(uid) for uid in u]
+        users = db["users"].find({"_id": {"$in" : qUsers}}, queryParams) # fix this to find 1
+      else: 
+        users = db["users"].find({"_id": ObjectId(u[0])}, queryParams) # fix this to find more than one
+      
+      if users != None: 
+        return [u for u in users]
+      else: 
+        return False
+    except Exception as e:
+      print(e)
+      return False
+
+  def serialize(self, results):
+    return [json.dumps(u, default=json_util.default) for u in results]

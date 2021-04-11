@@ -95,3 +95,43 @@ def delete():
     return {"msg": f"Unable to delete {data['uId']}"}, 422 
   else:
     return {"msg": f"deleted user: {data['uId']}"}, 200
+
+@userController.route('/user', methods=["POST"])
+def users():
+  """
+  Method is used to get users by id (short info for cache purposes)
+  This allows users profile pictures to show on pages
+
+  returns payload = {
+    "_id": str,
+    "name": str,
+    "profilePic": str,
+    "location": str
+  }
+  """
+  data = request.get_json()
+
+  if data == None or "users" not in data or data["users"] == []: 
+    return {"msg": "No user id's requested"}, 422
+
+  res = u.getUsers(data["users"])
+
+  if res == False:
+    return {"msg": "Unable to get new user(s)"}, 422
+  else: 
+    msg = "Successfully found " + str(len(res)) + "/" + str(len(data["users"])) + " users"
+    return {"msg": msg, "data": u.serialize(res) if res else []}, 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
