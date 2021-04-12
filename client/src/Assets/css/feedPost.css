@@ -20,6 +20,7 @@
 .feedPostContentText {
   display: inherit;
   margin: auto;
+  padding: 1rem;
 }
 
 .feedPostContentPhoto {
@@ -31,4 +32,10 @@
   padding: 1rem;
   width: 380px;
   height: auto;
+}
+
+.feedPostProfilePic {
+  border-radius: 50%;
+  width: 68px;
+  height: 68px;
 }

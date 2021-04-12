@@ -25,30 +25,16 @@ class Feed extends Component {
   async componentDidMount() {
     let res = await FeedService.getFeed()
       .then(data => {
-        console.log(data.data)
+        // console.log(data.data)
+        // console.log(data.users)
         if (data.data) {
-          let tempUserCache = this.props.getUsersFromCache()
-          let unknownUsers = []
-          data.data.map((e) => {
-            if (!(e._id in tempUserCache)) {
-              // convert this to a set
-              unknownUsers.push(e)
-            }
+          let userObj = {}
+          data.users.map((e) => {
+            userObj[e._id] = e
           })
-          if (unknownUsers.length > 0) {
-            let res_users = this.getUsersFromCacheHelper(unknownUsers)
-            if (!(res_users === undefined)) {
-              if (unknownUsers.length === 1) {
-                this.props.addUserToCache(res_users[0])
-              } else if (unknownUsers.length > 1) {
-                this.props.addUsersToCache(res_users)
-              }
-
-            }
-          }
           let newState = {
             masterFeed: data.data,
-            userCache: this.props.getUsersFromCache()
+            userCache: userObj
           }
           this.setState(newState)
         }
@@ -71,6 +57,9 @@ class Feed extends Component {
     }
     this.state.masterFeed.map((e, i) => {
       if (i % this.state.adFrequency == 0) visibleFeed.push(<FeedPost type="ad" data={e} />)
+      e.name = this.state.userCache[e.authorId].name
+      e.location = this.state.userCache[e.authorId].location
+      e.profilePic = this.state.userCache[e.authorId].profilePic
       switch (e.postType) {
         case "text":
           visibleFeed.push(<FeedPost type="text" data={e} />)

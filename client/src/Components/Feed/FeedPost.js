@@ -11,11 +11,8 @@ export default class FeedPost extends Component {
       comments: []
     }
   }
-  
 
   render() {
-    console.log(this.props)
-    
     const displayContent = () => {
       switch(this.props.data.postType) {
         case "text":
@@ -33,11 +30,12 @@ export default class FeedPost extends Component {
     }
 
     return (
-      <div className="fpost">
-        
-        
+      <div className="fpost">     
         <div className="feedDivs feedDivLeft">
-          <FeedProfilePicturePlaceholder/>
+          {(this.props.data.profilePic === undefined) ? <FeedProfilePicturePlaceholder/> : <img src={this.props.data.profilePic} className="feedPostProfilePic" alt="Picture picture"/>}
+          <br/>
+          <p>{this.props.data.name}</p>
+          <p>{this.props.data.location}</p>
         </div>
         <div className="feedDivs feedDivRight">
           <div className="feedPostContent">
