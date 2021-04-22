@@ -14,11 +14,12 @@
 }
 
 .feedDivLeft {
-  min-width: 15%;
+  width: 100px;
   text-align: center;
 }
 
 .feedDivRight {
   min-width: 80%;
+  height: auto;
   margin: auto;
 }

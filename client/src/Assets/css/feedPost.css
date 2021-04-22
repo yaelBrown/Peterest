@@ -1,19 +1,47 @@
 .fpost {
   display: flex; 
   flex-direction: row;
-  margin: 3rem 0;
+  margin: 5em 0;
 }
 
 .feedPostContent {
-  min-width: 380px;
+  min-width: 700px;
   min-height: 200px;
-  max-width: 600px;
+  max-width: 705px;
   max-height: 800px;
   height: 70%;
   background-image: linear-gradient(to bottom right, #EBEBEB, #FAFAFA);
   border: #D6D9DC 2px solid;
   display: flex;
   justify-content: center;
+}
+
+.feedHoverOptions {
+  min-width: 700px;
+  min-height: 200px;
+  max-width: 705px;
+  max-height: 800px;
+  height: 70%;
+  background-image: linear-gradient(to right, #000000, #fafafa00);
+  border: #D6D9DC 2px solid;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+  display: none;
+}
+
+.feedHoverOptions:hover {
+  display: block;
+}
+
+.fpName {
+  margin: 0.5rem auto 0 auto;
+}
+
+.fpLoc {
+  margin: 0;
+  color: #848484;
 }
 
 .feedPostContentText {
@@ -28,8 +56,8 @@
 }
 
 .feedPostContentPictureElement {
-  padding: 1rem;
-  width: 380px;
+  padding: 0rem;
+  width: 100%;
   height: auto;
 }
 

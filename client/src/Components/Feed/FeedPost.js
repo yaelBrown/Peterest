@@ -34,11 +34,18 @@ export default class FeedPost extends Component {
         <div className="feedDivs feedDivLeft">
           {(this.props.data.profilePic === undefined) ? <FeedProfilePicturePlaceholder/> : <img src={this.props.data.profilePic} className="feedPostProfilePic" alt="Picture picture"/>}
           <br/>
-          <p>{this.props.data.name}</p>
-          <p>{this.props.data.location}</p>
+          <p className="fpName">{this.props.data.name}</p>
+          <p className="fpLoc">
+            <small>
+              {this.props.data.location}
+            </small>
+          </p>
         </div>
         <div className="feedDivs feedDivRight">
           <div className="feedPostContent">
+            {/* <div className="feedHoverOptions">
+              hover stuff
+            </div> */}
             {displayContent()}
           </div>
         </div>
