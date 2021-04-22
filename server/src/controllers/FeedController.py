@@ -10,9 +10,13 @@ feedController = Blueprint('feedController', __name__)
 
 @feedController.route('/', methods=['GET'])
 def getFeed():
+  """
+  Gets all entries in the feed
+  q = 0 - All of posts in db
+  """
   post = postsService.PostsService()
   u = userService.UserService()
-  
+
   res = [p for p in post.getPosts()]
   usersFromFeed = set()
   

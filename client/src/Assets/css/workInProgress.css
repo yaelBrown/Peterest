@@ -1,0 +1,12 @@
+#wipSec {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 1rem;
+}
+
+#workingDogImage { 
+  width: 50%;
+  margin: auto;
+}

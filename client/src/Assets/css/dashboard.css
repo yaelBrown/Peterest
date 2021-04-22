@@ -13,4 +13,5 @@ body {
   width: calc(100% - 24rem);
   padding: .5rem;
   background-color: #ffffff;
+  max-width: 960px;
 }

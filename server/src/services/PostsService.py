@@ -31,7 +31,7 @@ class PostsService:
 
   def getPosts(self):
     try: 
-      resultPosts = db.posts.find().sort("dateTime", DESCENDING)
+      resultPosts = db.posts.find().limit(250).sort("dateTime", DESCENDING)
       return resultPosts
     except Exception as e:
       print(e)

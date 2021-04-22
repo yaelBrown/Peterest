@@ -22,33 +22,47 @@ class Feed extends Component {
     }
   }
   
-  async componentDidMount() {
-    let res = await FeedService.getFeed()
-      .then(data => {
-        // console.log(data.data)
-        // console.log(data.users)
-        if (data.data) {
-          let userObj = {}
-          data.users.map((e) => {
-            userObj[e._id] = e
-          })
-          let newState = {
-            masterFeed: data.data,
-            userCache: userObj
-          }
-          this.setState(newState)
-        }
-      })
+  componentDidMount() {
+    // let res = await FeedService.getFeed()
+    //   .then(data => {
+    //     if (data.data) {
+    //       let userObj = {}
+    //       data.users.map((e) => {
+    //         userObj[e._id] = e
+    //       })
+    //       let newState = {
+    //         masterFeed: data.data,
+    //         userCache: userObj
+    //       }
+    //       this.setState(newState)
+    //     }
+    //   })
+    this.getFeed()
   }
 
-  async getUsersFromCacheHelper(users) {
-    console.log(users)
-    return await UserService.getUsers(users)
+  async updateFeed() {
+    this.getFeed()
+  }
+
+  async getFeed() {
+    let res = await FeedService.getFeed()
+    .then(data => {
+      if (data.data) {
+        let userObj = {}
+        data.users.map((e) => {
+          userObj[e._id] = e
+        })
+        let newState = {
+          masterFeed: data.data,
+          userCache: userObj
+        }
+        this.setState(newState)
+      }
+    })
   }
 
   generateFeed() {
     if (this.state.masterFeed === undefined) {
-      console.log("state is undefined")
       return
     }
     let visibleFeed = []
@@ -124,7 +138,7 @@ class Feed extends Component {
       } else {
         return (
           <div className="dashboardContentPanels">
-            <FeedCreatePost/>
+            <FeedCreatePost data={{updateFeed: this.getFeed.bind(this)}}/>
             <hr/>
             { this.generateFeed() }
             {/* <FeedPost data={this.examplePostText()}/>

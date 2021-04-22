@@ -10,3 +10,9 @@ li {
   float: left;
   margin: 1rem;
 }
+
+#version {
+  text-align: center;
+  opacity: 10%;
+  width: 100%;
+}
