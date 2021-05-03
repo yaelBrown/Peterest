@@ -10,7 +10,6 @@ import PostService from '../../Services/PostService.js'
 
 import '../../Assets/css/feedCreatePost.css'
 
-
 export default class FeedCreatePost extends Component {
   constructor(props) {
     super(props)
@@ -70,16 +69,19 @@ export default class FeedCreatePost extends Component {
             onChange={(e) => this.handleChange("caption", e.target.value)}
             value={this.state.caption}
             className="fcPostInput" />
-          <Icon 
-            icon={photoIcon} 
-            width={fcpIconSizes} 
-            height={fcpIconSizes} 
-            className="fcpIcons" />
-          <Icon 
+          <label for="fcPostFileInput">
+            <Icon 
+              icon={photoIcon} 
+              width={fcpIconSizes} 
+              height={fcpIconSizes} 
+              className="fcpIcons" />
+          </label>
+          <input id="fcPostFileInput" type="file" accept="image/*"/>
+          {/* <Icon 
             icon={videoIcon} 
             width={fcpIconSizes} 
             height={fcpIconSizes} 
-            className="fcpIcons" />
+            className="fcpIcons" /> */}
           <Icon 
             icon={sendIcon} 
             width={fcpIconSizes} 

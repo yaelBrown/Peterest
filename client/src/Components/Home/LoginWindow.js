@@ -27,10 +27,7 @@ class LoginWindow extends Component {
     val = val.trim()
     this.setState({[property]: val})
   }
-
-  handleLogin = () => {
-  }
-  
+ 
   handleLogin = () => {
     if (!this.state.email || !this.state.password) return
     let rememberMe = this.state.rememberMe

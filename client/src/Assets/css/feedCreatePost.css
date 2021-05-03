@@ -6,7 +6,11 @@
 }
 
 .fcPostInput {
-  width: 70%;
+  width: 85%;
+}
+
+#fcPostFileInput {
+  display: none;
 }
 
 .fcpIcons {
